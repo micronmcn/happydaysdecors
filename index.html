@@ -306,6 +306,129 @@
             letter-spacing: 1px;
         }
 
+        /* --- "OUR RECENT WORKS" SWIPEABLE CARDS SECTION --- */
+        .recent-works-section {
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            color: var(--dark-brown);
+            font-size: 24px;
+            border-left: 4px solid var(--gold);
+            padding-left: 10px;
+        }
+
+        /* Swiper Scrollable Container */
+        .swipe-container-outer {
+            position: relative;
+            width: 100%;
+        }
+
+        .swipe-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 5px 25px 5px;
+            scrollbar-width: none; /* Hide standard Firefox scrollbar */
+        }
+
+        .swipe-container::-webkit-scrollbar {
+            display: none; /* Hide Chrome/Safari scrollbars */
+        }
+
+        .work-card {
+            flex: 0 0 280px; /* Rigid slide widths */
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .work-img-container {
+            height: 200px;
+            overflow: hidden;
+            background-color: var(--soft-cream);
+        }
+
+        .work-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .work-details {
+            padding: 15px;
+        }
+
+        .work-tag {
+            display: inline-block;
+            font-size: 11px;
+            background: var(--soft-cream);
+            color: var(--dark-brown);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .work-title {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* View More Arrow Indication Elements */
+        .scroll-indicator-arrow {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background: var(--dark-brown);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            cursor: pointer;
+            z-index: 10;
+            font-size: 18px;
+            border: 2px solid white;
+            animation: bounceRight 1.5s infinite;
+        }
+
+        @keyframes bounceRight {
+            0%, 100% { transform: translate(0, -50%); }
+            50% { transform: translate(8px, -50%); }
+        }
+
+        @media (max-width: 768px) {
+            .scroll-indicator-arrow {
+                right: 5px;
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+        }
+
         /* DETAIL POPUP CAROUSEL STYLE */
         .carousel-container {
             position: relative;
@@ -649,7 +772,7 @@
         .footer-col p, .footer-col ul {
             list-style: none;
             line-height: 1.8;
-        }
+            }
 
         .footer-col ul li a {
             color: #E6DFD7;
@@ -720,8 +843,7 @@
             <h1>Welcome To Dwaraka Collections</h1>
             <p>Quality products with trusted service. Fast delivery and customer support.</p>
         </div>
-
-        <!-- E-COMMERCE PRODUCTS GRID WITH DIRECT LINKS -->
+        <!-- E-COMMERCE PRODUCTS GRID -->
         <div class="cards-grid">
             <div class="product-card" onclick="openProductDetails('Kanchi Pattu Sarees')">
                 <div class="card-img-container">
@@ -751,6 +873,63 @@
                     <h3 class="card-title">Fancy Designer Sarees</h3>
                     <p class="card-description">Modern lightweight designs curated specifically for festivals & celebrations.</p>
                     <span class="card-action-hint">View Details & Book</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUR RECENT WORKS SECTION WITH SWIPE CAPABILITIES -->
+        <div class="recent-works-section">
+            <div class="section-header">
+                <h2>Our Recent Works</h2>
+            </div>
+            
+            <div class="swipe-container-outer">
+                <!-- Swipe Indicator Arrow -->
+                <div class="scroll-indicator-arrow" onclick="scrollWorksContainer(1)" title="Scroll for more works">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+
+                <div class="swipe-container" id="recentWorksWrapper">
+                    <!-- Card 1 -->
+                    <div class="work-card">
+                        <div class="work-img-container">
+                            <img src="https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Bridal Design">
+                        </div>
+                        <div class="work-details">
+                            <span class="work-tag">Handmade Bridal</span>
+                            <h4 class="work-title">Exclusive Kundan Bridal Border Work</h4>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="work-card">
+                        <div class="work-img-container">
+                            <img src="https://images.unsplash.com/photo-1610030470094-1a3559fb96ef?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Silk Masterpiece">
+                        </div>
+                        <div class="work-details">
+                            <span class="work-tag">Traditional Silk</span>
+                            <h4 class="work-title">Classic Magenta & Pure Gold Zari Weave</h4>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="work-card">
+                        <div class="work-img-container">
+                            <img src="https://images.unsplash.com/photo-1608748010899-18f300247112?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Modern Georgette">
+                        </div>
+                        <div class="work-details">
+                            <span class="work-tag">Modern Festive</span>
+                            <h4 class="work-title">Pastel Peach Handloom Blend Saree</h4>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="work-card">
+                        <div class="work-img-container">
+                            <img src="https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Floral Embroidery">
+                        </div>
+                        <div class="work-details">
+                            <span class="work-tag">Creative Embroidery</span>
+                            <h4 class="work-title">Detailed Floral Pattern Motif Threadwork</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -786,7 +965,6 @@
             <p style="margin-bottom: 10px;">Dwaraka Collections అనేది చేనేత మరియు సాంప్రదాయ వస్త్రాల రంగంలో ఒక నమ్మకమైన బ్రాండ్. మా క్లయింట్‌లకు అత్యుత్తమ నాణ్యత కలిగిన డిజైన్‌లు, ప్రత్యేకమైన హ్యాండ్లూమ్ డిజైన్‌లు అందించడమే మా ముఖ్య ఉద్దేశ్యం.</p>
             <p>మేము నేరుగా మా నైపుణ్యం కలిగిన నేత కార్మికుల (Weavers) నుండి సేకరించిన ప్యూర్ కలెక్షన్స్ అందిస్తాము. కలర్స్, క్వాలిటీ మరియు కస్టమర్ సంతృప్తి విషయంలో మేము ఎప్పుడూ రాజీ పడం. ప్రతి ఆర్డర్ సురక్షితమైన ప్యాకింగ్ మరియు ఫాస్ట్ డెలివరీ ద్వారా మీ ముందుకు వస్తుంది.</p>
         </div>
-
         <div class="info-block" id="faqSection">
             <h3>Frequently Asked Questions (FAQ)</h3>
             <div class="faq-item">
@@ -814,7 +992,6 @@
             <span class="close-popup" onclick="closeDetailsModal()">&times;</span>
             <div class="modal-header" id="detailsTitle">Product Details</div>
             
-            <!-- Dynamic Multiple Image Carousel -->
             <div class="carousel-container">
                 <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
                 <div id="carouselSlidesContainer"></div>
@@ -932,7 +1109,6 @@
             <p>&copy; 2026 Dwaraka Collections. All Rights Reserved.</p>
         </div>
     </footer>
-
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYhtVwbJjDjkZA6Dgmom2u15jspiquWpq9psgKEuaQ58XXGfkrv9OmPeGu2nKdmjyYdw/exec";
         
@@ -940,7 +1116,6 @@
         let activeSlideIndex = 0;
         let totalSlides = 0;
 
-        // Structured Database storing multiple high-quality image URLs
         const productData = {
             "Kanchi Pattu Sarees": {
                 text: "Indulge in our exquisite traditional royal Kanchi Pattu designs crafted by ancestral handloom weavers.",
@@ -999,6 +1174,16 @@
             if(element) { element.scrollIntoView({ behavior: 'smooth' }); }
         }
 
+        // SWIPE CAROUSEL DIRECTIONAL SCROLL
+        function scrollWorksContainer(direction) {
+            const container = document.getElementById('recentWorksWrapper');
+            const scrollDistance = 300; // Scrolls equivalent to roughly one card width
+            container.scrollBy({
+                left: direction * scrollDistance,
+                behavior: 'smooth'
+            });
+        }
+
         // POPULATE DETAIL POPUP WITH IMAGE GALLERY CAROUSEL
         function openProductDetails(productName) {
             selectedProduct = productName;
@@ -1007,7 +1192,6 @@
             const details = productData[productName] || { text: "", images: [], tools: [] };
             document.getElementById('detailsServiceText').innerText = details.text;
             
-            // Build Carousel Images
             const slidesContainer = document.getElementById('carouselSlidesContainer');
             const dotsContainer = document.getElementById('carouselDotsContainer');
             slidesContainer.innerHTML = "";
@@ -1024,7 +1208,6 @@
                 dotsContainer.innerHTML += `<span class="${dotClass}" onclick="setSlide(${idx})"></span>`;
             });
 
-            // Build Tools table list
             const tbody = document.getElementById('toolsList');
             tbody.innerHTML = "";
             details.tools.forEach(tool => {
@@ -1035,7 +1218,6 @@
             document.getElementById('detailsModal').classList.remove('hidden');
         }
 
-        // Slide Changer logic
         function changeSlide(direction) {
             if (totalSlides === 0) return;
             let nextIndex = activeSlideIndex + direction;
