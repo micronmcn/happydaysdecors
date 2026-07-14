@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Dwaraka Collections</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --dark-brown: #4A2E1B;
+            --light-brown: #5D3A22;
+            --gold: #D4AF37;
+            --soft-cream: #FDFBF7;
+            --text-dark: #333333;
+            --border-color: #E6DFD7;
+            --success-green: #27ae60;
+        }
+
+        body {
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Bar with Back Arrow */
+        .nav-header {
+            background-color: var(--dark-brown);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-arrow {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .back-arrow:hover {
+            transform: translateX(-5px);
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section Grid Layout */
+        .contact-wrapper {
+            padding: 50px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-top: 6px solid var(--dark-brown);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                padding: 25px 15px;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-heading {
+            color: var(--dark-brown);
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-subtext {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Form Styling */
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-brown);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: var(--soft-cream);
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--dark-brown);
+        }
+
+        .send-btn {
+            background-color: var(--dark-brown);
+            color: white;
+            border: none;
+            padding: 13px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .send-btn:hover {
+            background-color: var(--light-brown);
+        }
+
+        .send-btn:disabled {
+            background-color: #a29bfe;
+            cursor: not-allowed;
+        }
+
+        /* Info Side Styling */
+        .info-card {
+            background: var(--soft-cream);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-item .icon-box {
+            background-color: var(--dark-brown);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .info-details h4 {
+            color: var(--dark-brown);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .info-details p, .info-details a {
+            color: #555;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .info-details a:hover {
+            text-decoration: underline;
+            color: var(--light-brown);
+        }
+
+        /* Social Connection Area */
+        .social-connect h5 {
+            color: var(--dark-brown);
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .social-badge-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-badge {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--dark-brown);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-badge:hover {
+            background-color: var(--dark-brown);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Full Footer Component */
+        footer {
+            background-color: var(--dark-brown);
+            color: #E6DFD7;
+            padding: 40px 0 20px 0;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p, .footer-col ul {
+            list-style: none;
+            line-height: 1.8;
+        }
+
+        .footer-col ul li a {
+            color: #E6DFD7;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <div class="container nav-container">
+            <a href="index.html" class="back-arrow" onclick="if(history.length > 1){ event.preventDefault(); history.back(); }">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="page-title">Dwaraka Collections</div>
+        </div>
+    </div>
+
+    <main class="container contact-wrapper">
+        <div class="contact-grid">
+            
+            <div>
+                <h1 class="contact-heading">Get In Touch</h1>
+                <p class="contact-subtext">Have any questions about our handloom products, custom sizing, or bulk ordering? Drop us a message and we will respond as swiftly as possible!</p>
+                
+                <form class="contact-form" id="dwarakaContactForm" onsubmit="handleEnquirySubmit(event)">
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="custName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address / Phone Number *</label>
+                        <input type="text" id="custContact" required placeholder="Enter your contact info">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Message *</label>
+                        <textarea id="custMessage" rows="4" required placeholder="Type your query or custom orders details here..."></textarea>
+                    </div>
+                    <button type="submit" class="send-btn" id="submitBtn">
+                        <span id="btnText">Send Message</span>
+                    </button>
+                </form>
+            </div>
+
+            <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 30px;">
+                <div class="info-card">
+                    
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+                        <div class="info-details">
+                            <h4>Direct WhatsApp Support</h4>
+                            <p><a href="https://wa.me/919908180194" target="_blank">+91 9908180194</a></p>
+                            <p style="font-size: 12px; color: #888; margin-top: 2px;">Available Mon - Sat (9:00 AM - 7:00 PM)</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                        <div class="info-details">
+                            <h4>Email Enquiries</h4>
+                            <p><a href="mailto:info@dwarakacollections.com">info@dwarakacollections.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-details">
+                            <h4>Our Design Studio & Workshop</h4>
+                            <p>Handloom Street, Mangalagiri / Dharmavaram Region,</p>
+                            <p>Andhra Pradesh, India - Pin Code Details.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="social-connect">
+                    <h5>Connect on Social Networks</h5>
+                    <div class="social-badge-row">
+                        <a href="#" class="social-badge"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-badge"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-badge"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Dwaraka Collections</h4>
+                <p>చేనేత వస్త్రాల నమ్మకమైన కేంద్రం. నాణ్యమైన ఉత్పత్తులను నేరుగా మీ ఇంటికే అందిస్తాము.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#aboutSection">About Us</a></li>
+                    <li><a href="index.html#faqSection">FAQs Portal</a></li>
+                    <li><a href="index.html">Back To Home</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Support</h4>
+                <p><i class="fas fa-envelope"></i> info@dwarakacollections.com</p>
+                <p><i class="fab fa-whatsapp"></i> +91 XXXXXXXXXX</p>
+                <p><i class="fas fa-map-marker-alt"></i> Handloom Street, Andhra Pradesh, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dwaraka Collections. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ⚠️ క్రూషియల్: నీ గూగుల్ వెబ్ యాప్ URL ని ఇక్కడ కింద ఉన్న కొటేషన్స్ మధ్యలో పేస్ట్ చెయ్!
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzv0hO29AXdPrxzyRYtUpiQbwpXLSwahLBRfpf3CZCNkfSpdk9MQZGXTVMuAqS-S1XzMg/exec";
+
+        function handleEnquirySubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            
+            // బటన్ ని లోడింగ్ మోడ్ లోకి మారుస్తున్నాం
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // ఇన్పుట్ డేటాను ఆబ్జెక్ట్ లోకి తీసుకుంటున్నాం
+            const formData = {
+                name: document.getElementById('custName').value,
+                contact: document.getElementById('custContact').value,
+                message: document.getElementById('custMessage').value
+            };
+
+            // ఫైరింగ్ బ్యాకెండ్ రిక్వెస్ట్ (Fetch API)
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Apps script CORS ఇష్యూ రాకుండా సేఫ్ మోడ్
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                // సక్సెస్ అలర్ట్
+                alert('Thank You Dear Customer! Your Message Request Received Successfully.Our team will contact you soon. 👍');
+                
+                // ఫామ్ రీసెట్ మరియు రీస్టోర్ బటన్
+                document.getElementById('dwarakaContactForm').reset();
+                submitBtn.disabled = false;
+                btnText.innerText = 'Send Message';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Oops! There was a small problem saving the data. Please try again.!');
+                submitBtn.disabled = false;
+                btnText.innerText = 'Send Message';
+            });
+        }
+    </script>
+</body>
+</html>
+
