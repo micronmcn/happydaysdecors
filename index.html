@@ -232,7 +232,7 @@
             margin-bottom: 25px;
         }
 
-        /* NEW CARD STYLING (E-COMMERCE LIKE) */
+        /* CARDS GRID STYLE */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -257,15 +257,23 @@
             box-shadow: 0 10px 20px rgba(74, 46, 27, 0.15);
         }
 
-        .card-img-placeholder {
+        .card-img-container {
+            position: relative;
+            height: 230px;
             background-color: var(--soft-cream);
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-brown);
-            font-size: 40px;
+            overflow: hidden;
             border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .card-img {
+            transform: scale(1.08);
         }
 
         .card-body {
@@ -296,6 +304,77 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        /* DETAIL POPUP CAROUSEL STYLE */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background-color: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 5;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
         }
 
         /* TOOLS TABLE STYLE IN POPUP */
@@ -642,10 +721,12 @@
             <p>Quality products with trusted service. Fast delivery and customer support.</p>
         </div>
 
-        <!-- NEW E-COMMERCE PRODUCTS GRID -->
+        <!-- E-COMMERCE PRODUCTS GRID WITH DIRECT LINKS -->
         <div class="cards-grid">
             <div class="product-card" onclick="openProductDetails('Kanchi Pattu Sarees')">
-                <div class="card-img-placeholder"><i class="fas fa-gem"></i></div>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80" alt="Kanchi Saree" class="card-img">
+                </div>
                 <div class="card-body">
                     <h3 class="card-title">Kanchi Pattu Sarees</h3>
                     <p class="card-description">Exclusive traditional pure handloom silk collection with grand gold borders.</p>
@@ -653,15 +734,19 @@
                 </div>
             </div>
             <div class="product-card" onclick="openProductDetails('Gadwal Cotton Silk')">
-                <div class="card-img-placeholder"><i class="fas fa-spa"></i></div>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" alt="Gadwal Saree" class="card-img">
+                </div>
                 <div class="card-body">
                     <h3 class="card-title">Gadwal Cotton Silk</h3>
-                    <p class="card-description">Beautiful lightweight borders blended perfectly with traditional colors.</p>
+                    <p class="card-description">Beautiful lightweight cotton borders blended perfectly with traditional silk colors.</p>
                     <span class="card-action-hint">View Details & Book</span>
                 </div>
             </div>
             <div class="product-card" onclick="openProductDetails('Fancy Designer Sarees')">
-                <div class="card-img-placeholder"><i class="fas fa-star-and-crescent"></i></div>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" alt="Designer Saree" class="card-img">
+                </div>
                 <div class="card-body">
                     <h3 class="card-title">Fancy Designer Sarees</h3>
                     <p class="card-description">Modern lightweight designs curated specifically for festivals & celebrations.</p>
@@ -679,16 +764,16 @@
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">2</div>
-                    <div class="roadmap-card"><h4>Review Full Tools & Details</h4></div>
+                    <div class="roadmap-card"><h4>Review Gallery & Tools</h4></div>
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">3</div>
-                    <div class="roadmap-card"><h4>Click Book Now & Fill Slots</h4></div>
+                    <div class="roadmap-card"><h4>Click Book Now & Choose Slot</h4></div>
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">4</div>
                     <div class="roadmap-card"><h4>Submit Booking</h4></div>
-               </div>
+                </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">5</div>
                     <div class="roadmap-card"><h4>Team Contacts You</h4></div>
@@ -723,11 +808,20 @@
         <p>Welcome back, Administrator.</p>
     </main>
 
-    <!-- POPUP 1: DETAILS MODAL -->
+    <!-- POPUP 1: RICH DETAILS MODAL WITH CAROUSEL -->
     <div class="modal-overlay hidden" id="detailsModal">
         <div class="modal-content">
             <span class="close-popup" onclick="closeDetailsModal()">&times;</span>
             <div class="modal-header" id="detailsTitle">Product Details</div>
+            
+            <!-- Dynamic Multiple Image Carousel -->
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+                <div id="carouselSlidesContainer"></div>
+                <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
+                <div class="carousel-dots" id="carouselDotsContainer"></div>
+            </div>
+
             <div style="margin-bottom: 15px;">
                 <p id="detailsServiceText">We provide premium quality authentic thread works.</p>
                 <h4 style="margin-top: 15px; color: var(--dark-brown);">Service Tools Included:</h4>
@@ -842,13 +936,19 @@
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYhtVwbJjDjkZA6Dgmom2u15jspiquWpq9psgKEuaQ58XXGfkrv9OmPeGu2nKdmjyYdw/exec";
         
-        // Active global variable to store current selected card/item
         let selectedProduct = "";
+        let activeSlideIndex = 0;
+        let totalSlides = 0;
 
-        // Simulated Database for details view 
+        // Structured Database storing multiple high-quality image URLs
         const productData = {
             "Kanchi Pattu Sarees": {
                 text: "Indulge in our exquisite traditional royal Kanchi Pattu designs crafted by ancestral handloom weavers.",
+                images: [
+                    "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1610030470094-1a3559fb96ef?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=600&q=80"
+                ],
                 tools: [
                     { name: "Wooden Handloom Weave Loom", qty: "1 Unit" },
                     { name: "Gold Zari Thread Reels", qty: "12 spools" },
@@ -857,6 +957,11 @@
             },
             "Gadwal Cotton Silk": {
                 text: "Experience maximum comfort paired with elegant styles. Sourced directly from local cottage weavers.",
+                images: [
+                    "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1608748010899-18f300247112?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=600&q=80"
+                ],
                 tools: [
                     { name: "Manual Cotton Loom", qty: "1 Unit" },
                     { name: "Silk Blend Threads", qty: "8 Colors" },
@@ -865,6 +970,11 @@
             },
             "Fancy Designer Sarees": {
                 text: "Our vibrant fancy lightweight sarees designed for comfortable parties, celebrations, and events.",
+                images: [
+                    "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=600&q=80",
+                    "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80"
+                ],
                 tools: [
                     { name: "Heavy Embroidery Machine Setup", qty: "2 Units" },
                     { name: "Stonework Embellishments", qty: "250 Grams" },
@@ -889,14 +999,32 @@
             if(element) { element.scrollIntoView({ behavior: 'smooth' }); }
         }
 
-        // STEP 1: OPEN PRODUCT DETAILS MODAL
+        // POPULATE DETAIL POPUP WITH IMAGE GALLERY CAROUSEL
         function openProductDetails(productName) {
             selectedProduct = productName;
             document.getElementById('detailsTitle').innerText = productName;
             
-            const details = productData[productName] || { text: "", tools: [] };
+            const details = productData[productName] || { text: "", images: [], tools: [] };
             document.getElementById('detailsServiceText').innerText = details.text;
             
+            // Build Carousel Images
+            const slidesContainer = document.getElementById('carouselSlidesContainer');
+            const dotsContainer = document.getElementById('carouselDotsContainer');
+            slidesContainer.innerHTML = "";
+            dotsContainer.innerHTML = "";
+            
+            activeSlideIndex = 0;
+            totalSlides = details.images.length;
+
+            details.images.forEach((imgUrl, idx) => {
+                const imgClass = idx === 0 ? "carousel-slide active" : "carousel-slide";
+                slidesContainer.innerHTML += `<img src="${imgUrl}" class="${imgClass}" alt="${productName} View">`;
+                
+                const dotClass = idx === 0 ? "carousel-dot active" : "carousel-dot";
+                dotsContainer.innerHTML += `<span class="${dotClass}" onclick="setSlide(${idx})"></span>`;
+            });
+
+            // Build Tools table list
             const tbody = document.getElementById('toolsList');
             tbody.innerHTML = "";
             details.tools.forEach(tool => {
@@ -907,11 +1035,32 @@
             document.getElementById('detailsModal').classList.remove('hidden');
         }
 
+        // Slide Changer logic
+        function changeSlide(direction) {
+            if (totalSlides === 0) return;
+            let nextIndex = activeSlideIndex + direction;
+            if (nextIndex >= totalSlides) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = totalSlides - 1;
+            setSlide(nextIndex);
+        }
+
+        function setSlide(index) {
+            activeSlideIndex = index;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === index);
+            });
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }
+
         function closeDetailsModal() {
             document.getElementById('detailsModal').classList.add('hidden');
         }
 
-        // STEP 2: TRANSITION FROM DETAILS TO BOOKING FORM MODAL
         function openBookingFromDetails() {
             closeDetailsModal();
             document.getElementById('bookingModal').classList.remove('hidden');
@@ -922,7 +1071,6 @@
             document.getElementById('bookingForm').reset();
         }
 
-        // STEP 3: SUBMIT BOOKING FORM & OPEN MINIMIZED THANK YOU MODAL
         function handleBookingSubmit(e) {
             e.preventDefault();
             
@@ -932,16 +1080,15 @@
             submitBtn.innerText = "Processing...⏳";
 
             const formData = {
-                action: "addOrder", // Keeps backward compatibility with active sheet macros
+                action: "addOrder",
                 name: document.getElementById('bookName').value,
                 phone: document.getElementById('bookContact').value,
                 whatsapp: document.getElementById('bookWhatsapp').value,
                 location: document.getElementById('bookLocation').value,
                 datetime: document.getElementById('bookDateTime').value,
-                message: "Selected: " + selectedProduct + " | " + document.getElementById('bookText').value
+                message: "Selected Saree: " + selectedProduct + " | " + document.getElementById('bookText').value
             };
 
-            // Post booking details to existing Google Apps Script API
             fetch(WEB_APP_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -950,7 +1097,6 @@
                 body: JSON.stringify(formData)
             })
             .then(() => {
-                // Minimize (close) form, display localized Thank you pop-up
                 closeBookingModal();
                 document.getElementById('thankYouMsg').innerText = "Thank you for booking " + selectedProduct + "!";
                 document.getElementById('thankYouModal').classList.remove('hidden');
@@ -960,7 +1106,6 @@
             })
             .catch(err => {
                 console.error(err);
-                // Fallback completion window if CORS limits the prompt feedback
                 closeBookingModal();
                 document.getElementById('thankYouMsg').innerText = "Thank you for booking " + selectedProduct + "!";
                 document.getElementById('thankYouModal').classList.remove('hidden');
@@ -973,7 +1118,6 @@
             document.getElementById('thankYouModal').classList.add('hidden');
         }
 
-        // 4. Admin Auth controls
         function openLoginModal() { closeSideMenu(); document.getElementById('loginModal').classList.remove('hidden'); }
         function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
 
@@ -1002,4 +1146,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
