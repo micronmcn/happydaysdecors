@@ -232,86 +232,7 @@
             margin-bottom: 25px;
         }
 
-        /* CARDS GRID STYLE */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .product-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(74, 46, 27, 0.15);
-        }
-
-        .card-img-container {
-            position: relative;
-            height: 230px;
-            background-color: var(--soft-cream);
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .card-img {
-            transform: scale(1.08);
-        }
-
-        .card-body {
-            padding: 20px;
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            color: var(--dark-brown);
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .card-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .card-action-hint {
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* --- "OUR RECENT WORKS" SWIPEABLE CARDS SECTION --- */
-        .recent-works-section {
-            margin: 50px 0;
-            position: relative;
-        }
-
+        /* SECTION HEADER STANDARD */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -326,7 +247,89 @@
             padding-left: 10px;
         }
 
-        /* Swiper Scrollable Container */
+        /* MATCHED CARDS GRID STYLE */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0 40px 0;
+        }
+
+        /* Sized exactly same as .work-card */
+        .product-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(74, 46, 27, 0.1);
+        }
+
+        /* Image matching exact work container height (200px) */
+        .card-img-container {
+            position: relative;
+            height: 200px;
+            background-color: var(--soft-cream);
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        /* Padding details matched with work-details */
+        .card-body {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .card-action-hint {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: auto;
+        }
+
+        /* --- "OUR RECENT WORKS" SWIPEABLE CARDS SECTION --- */
+        .recent-works-section {
+            margin: 40px 0;
+            position: relative;
+        }
+
         .swipe-container-outer {
             position: relative;
             width: 100%;
@@ -338,15 +341,15 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 10px 5px 25px 5px;
-            scrollbar-width: none; /* Hide standard Firefox scrollbar */
+            scrollbar-width: none; 
         }
 
         .swipe-container::-webkit-scrollbar {
-            display: none; /* Hide Chrome/Safari scrollbars */
+            display: none; 
         }
 
         .work-card {
-            flex: 0 0 280px; /* Rigid slide widths */
+            flex: 0 0 280px; 
             background: white;
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -427,6 +430,77 @@
                 height: 38px;
                 font-size: 15px;
             }
+        }
+
+        /* --- OUR CUSTOMERS WHAT SAY SECTION --- */
+        .feedback-section {
+            margin: 50px 0;
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feedback-card {
+            background-color: var(--soft-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feedback-stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .feedback-text {
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .feedback-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--dark-brown);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-details h5 {
+            font-size: 14px;
+            color: var(--dark-brown);
+            font-weight: bold;
+        }
+
+        .user-details span {
+            font-size: 11px;
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
         }
 
         /* DETAIL POPUP CAROUSEL STYLE */
@@ -718,32 +792,6 @@
             margin-bottom: 10px;
         }
 
-        /* Star Rating Styles */
-        .star-rating {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-            font-size: 30px;
-            flex-direction: row-reverse;
-        }
-
-        .star-rating input {
-            display: none;
-        }
-
-        .star-rating label {
-            color: #ddd;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .star-rating input:checked ~ label,
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: var(--gold);
-        }
-
         footer {
             background-color: var(--dark-brown);
             color: #E6DFD7;
@@ -772,7 +820,7 @@
         .footer-col p, .footer-col ul {
             list-style: none;
             line-height: 1.8;
-            }
+        }
 
         .footer-col ul li a {
             color: #E6DFD7;
@@ -843,7 +891,11 @@
             <h1>Welcome To Dwaraka Collections</h1>
             <p>Quality products with trusted service. Fast delivery and customer support.</p>
         </div>
-        <!-- E-COMMERCE PRODUCTS GRID -->
+
+        <!-- E-COMMERCE PRODUCTS GRID (Now matching Recent Work Card dimensions perfectly!) -->
+        <div class="section-header">
+            <h2>Our Collections</h2>
+        </div>
         <div class="cards-grid">
             <div class="product-card" onclick="openProductDetails('Kanchi Pattu Sarees')">
                 <div class="card-img-container">
@@ -876,8 +928,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- OUR RECENT WORKS SECTION WITH SWIPE CAPABILITIES -->
+        <!-- OUR RECENT WORKS SECTION -->
         <div class="recent-works-section">
             <div class="section-header">
                 <h2>Our Recent Works</h2>
@@ -934,6 +985,75 @@
             </div>
         </div>
 
+        <!-- NEW: WHAT OUR CUSTOMERS SAY SECTION -->
+        <div class="feedback-section">
+            <div class="section-header">
+                <h2>Our Customers What Say</h2>
+            </div>
+            <div class="feedback-grid">
+                <!-- Review 1 -->
+                <div class="feedback-card">
+                    <div>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="feedback-text">"Kanchi Pattu saree quality is absolutely outstanding. The gold zari borders look extremely rich, and the customer support team guided me perfectly during the shipping process."</p>
+                    </div>
+                    <div class="feedback-user">
+                        <div class="user-avatar">SV</div>
+                        <div class="user-details">
+                            <h5>Srilatha V.</h5>
+                            <span><i class="fas fa-check-circle"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="feedback-card">
+                    <div>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="feedback-text">"నేను ఆర్డర్ చేసిన గద్వాల్ కాటన్ సిల్క్ సారీ చాలా తేలికగా, కలర్స్ చాలా బాగున్నాయి. డెలివరీ కూడా చాలా ఫాస్ట్ గా జరిగింది. తప్పకుండా మళ్ళీ కొంటాను!"</p>
+                    </div>
+                    <div class="feedback-user">
+                        <div class="user-avatar">KP</div>
+                        <div class="user-details">
+                            <h5>Kalyani P.</h5>
+                            <span><i class="fas fa-check-circle"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="feedback-card">
+                    <div>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="feedback-text">"Great designs on the designer sarees collection. The hand embroidery works are top notch. Excellent booking convenience through this catalog portal."</p>
+                    </div>
+                    <div class="feedback-user">
+                        <div class="user-avatar">RN</div>
+                        <div class="user-details">
+                            <h5>Rajeshwari N.</h5>
+                            <span><i class="fas fa-check-circle"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="roadmap-wrap">
             <h3 class="roadmap-title">Process Of Order</h3>
             <div class="roadmap-flow">
@@ -965,6 +1085,7 @@
             <p style="margin-bottom: 10px;">Dwaraka Collections అనేది చేనేత మరియు సాంప్రదాయ వస్త్రాల రంగంలో ఒక నమ్మకమైన బ్రాండ్. మా క్లయింట్‌లకు అత్యుత్తమ నాణ్యత కలిగిన డిజైన్‌లు, ప్రత్యేకమైన హ్యాండ్లూమ్ డిజైన్‌లు అందించడమే మా ముఖ్య ఉద్దేశ్యం.</p>
             <p>మేము నేరుగా మా నైపుణ్యం కలిగిన నేత కార్మికుల (Weavers) నుండి సేకరించిన ప్యూర్ కలెక్షన్స్ అందిస్తాము. కలర్స్, క్వాలిటీ మరియు కస్టమర్ సంతృప్తి విషయంలో మేము ఎప్పుడూ రాజీ పడం. ప్రతి ఆర్డర్ సురక్షితమైన ప్యాకింగ్ మరియు ఫాస్ట్ డెలివరీ ద్వారా మీ ముందుకు వస్తుంది.</p>
         </div>
+
         <div class="info-block" id="faqSection">
             <h3>Frequently Asked Questions (FAQ)</h3>
             <div class="faq-item">
@@ -977,7 +1098,6 @@
             </div>
         </div>
     </main>
-
     <main class="container view-section hidden" id="adminView">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h2>Admin Dashboard Control</h2>
@@ -1052,7 +1172,6 @@
             </form>
         </div>
     </div>
-
     <!-- POPUP 3: THANK YOU RESPONSE MODAL -->
     <div class="modal-overlay hidden" id="thankYouModal">
         <div class="modal-content" style="max-width: 400px;">
@@ -1109,6 +1228,7 @@
             <p>&copy; 2026 Dwaraka Collections. All Rights Reserved.</p>
         </div>
     </footer>
+
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYhtVwbJjDjkZA6Dgmom2u15jspiquWpq9psgKEuaQ58XXGfkrv9OmPeGu2nKdmjyYdw/exec";
         
@@ -1177,7 +1297,7 @@
         // SWIPE CAROUSEL DIRECTIONAL SCROLL
         function scrollWorksContainer(direction) {
             const container = document.getElementById('recentWorksWrapper');
-            const scrollDistance = 300; // Scrolls equivalent to roughly one card width
+            const scrollDistance = 300; 
             container.scrollBy({
                 left: direction * scrollDistance,
                 behavior: 'smooth'
@@ -1214,7 +1334,6 @@
                 const row = `<tr><td>${tool.name}</td><td>${tool.qty}</td></tr>`;
                 tbody.innerHTML += row;
             });
-
             document.getElementById('detailsModal').classList.remove('hidden');
         }
 
