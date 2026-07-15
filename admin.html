@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        :root {
+            --dark-brown: #4B3621;
+            --white: #FFFFFF;
+        }
+        body { margin: 0; font-family: sans-serif; background-color: #f4f4f4; }
+
+        /* Header */
+        header { background: var(--dark-brown); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .menu-btn { cursor: pointer; font-size: 1.5rem; position: relative; }
+        .dropdown { display: none; position: absolute; right: 0; background: var(--white); color: var(--dark-brown); padding: 10px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 150px; }
+        
+        /* Hero & Stats */
+        .hero { padding: 2rem; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 2rem; }
+        .card { background: var(--white); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        /* Buttons */
+        button { background: var(--dark-brown); color: var(--white); border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; margin-top: 10px; }
+
+        /* Popup */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: var(--white); padding: 2rem; border-radius: 8px; width: 300px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div><img src="logo.png" alt="Logo" style="height: 40px;"></div>
+    <div id="datetime"></div>
+    <div class="menu-btn" onclick="toggleMenu()">☰
+        <div id="navMenu" class="dropdown">
+            <div>Admin Settings</div>
+            <div>New Excel Sheet</div>
+            <div>Files</div>
+            <div>Add Product</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Welcome, Admin</h1>
+</section>
+
+<div class="stats-grid">
+    <button onclick="openModal('eventModal')">Add Event</button>
+    <button onclick="openModal('workModal')">Add Recent Works</button>
+    <button onclick="alert('Slot Bookings Overview: All slots are currently active.')">Slot Bookings</button>
+</div>
+
+<!-- Add Event Popup -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <h3>Add New Event</h3>
+        <input type="file"><br><br>
+        <input type="text" placeholder="Code"><br><br>
+        <input type="text" placeholder="Event Name"><br><br>
+        <input type="number" placeholder="Price"><br><br>
+        <textarea placeholder="Details"></textarea><br><br>
+        <input type="text" placeholder="Tools with Qty"><br><br>
+        <button onclick="submitForm('eventModal')">Add</button>
+    </div>
+</div>
+
+<!-- Add Recent Works Popup -->
+<div id="workModal" class="modal">
+    <div class="modal-content">
+        <h3>Add Recent Work</h3>
+        <input type="file"><br><br>
+        <input type="text" placeholder="Event Name"><br><br>
+        <textarea placeholder="Details"></textarea><br><br>
+        <button onclick="submitForm('workModal')">Add</button>
+    </div>
+</div>
+
+<script>
+    // Date & Time
+    setInterval(() => {
+        document.getElementById('datetime').innerText = new Date().toLocaleString();
+    }, 1000);
+
+    function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+
+    function submitForm(id) {
+        document.getElementById(id).style.display = 'none';
+        alert("Your event is successfully added!");
+    }
+</script>
+
+</body>
+</html>
+
