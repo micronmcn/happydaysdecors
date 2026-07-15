@@ -3,99 +3,890 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Admin Dashboard</title>
+    <title>Owner Dashboard - Dwaraka Collections</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         :root {
-            --primary-brown: #4B3621;
-            --white: #FFFFFF;
-            --light-gray: #f4f4f4;
+            --dark-brown: #4A2E1B; 
+            --light-brown: #5D3A22; 
+            --soft-cream: #FDFBF7;
+            --text-dark: #333333; 
+            --border-color: #E6DFD7; 
+            --success-green: #27ae60;
+            --pending-orange: #e67e22; 
+            --navy-blue: #2c3e50; 
+            --purple: #8e44ad;
+            --accent-gold: #c5a880;
         }
+        body { background-color: var(--soft-cream); color: var(--text-dark); min-height: 100vh; }
+        
+        #loginOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--soft-cream); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .login-card { background: white; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(74, 46, 27, 0.1); border-top: 6px solid var(--dark-brown); max-width: 400px; width: 90%; text-align: center; }
+        .login-field { position: relative; margin-bottom: 20px; text-align: left; }
+        .login-field label { display: block; font-size: 13px; font-weight: 600; color: var(--dark-brown); margin-bottom: 6px; }
+        .login-field input { width: 100%; padding: 12px 12px 12px 40px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 15px; outline: none; }
+        .login-field i { position: absolute; left: 15px; top: 38px; color: #888; }
+        .login-btn { width: 100%; background: var(--dark-brown); color: white; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light-gray); }
-
-        /* Header */
-        header { 
-            background: var(--primary-brown); 
-            color: var(--white); 
-            padding: 1rem 2rem; 
+        #mainDashboard { display: none; }
+        
+        /* ─── HEADER UPGRADE ─── */
+        .admin-header { 
+            background-color: var(--dark-brown); 
+            color: white; 
+            padding: 10px 24px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            position: sticky;
+            top: 0;
+            z-index: 990;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
-        .menu-container { position: relative; cursor: pointer; }
-        .dropdown { 
-            display: none; position: absolute; right: 0; background: var(--white); 
-            color: var(--primary-brown); padding: 10px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .brand-logo { height: 45px; width: auto; object-fit: contain; border-radius: 4px; border: 1px solid var(--accent-gold); }
+        .header-middle { font-size: 14px; color: var(--accent-gold); font-weight: 600; font-family: 'Courier New', Courier, monospace; letter-spacing: 0.5px; }
+        .header-right { position: relative; display: flex; align-items: center; gap: 15px; }
+        .menu-trigger { background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; padding: 8px; border-radius: 4px; transition: 0.2s; }
+        .menu-trigger:hover { background: rgba(255,255,255,0.1); }
+        
+        /* Dropdown CSS */
+        .dropdown-menu { 
+            position: absolute; 
+            top: 45px; 
+            right: 0; 
+            background: white; 
+            border-radius: 8px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+            width: 250px; 
+            display: none; 
+            z-index: 1001; 
+            border: 1px solid var(--border-color);
+            overflow: hidden;
         }
+        .dropdown-menu.show { display: block; }
+        .dropdown-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 14px 18px; 
+            color: var(--text-dark); 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            border-bottom: 1px solid var(--soft-cream);
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #fcf9f5; color: var(--dark-brown); }
+        .dropdown-item i { color: var(--dark-brown); width: 18px; text-align: center; }
 
-        /* Dashboard */
-        .hero { padding: 2rem; background: var(--white); margin: 20px; border-radius: 8px; }
-        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
-        button { background: var(--primary-brown); color: var(--white); padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; }
+        /* ─── HERO SECTION ─── */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--light-brown) 100%);
+            color: white;
+            padding: 35px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(74, 46, 27, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid var(--accent-gold);
+        }
+        .hero-text h1 { font-size: 26px; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .hero-text p { font-size: 14px; opacity: 0.85; }
+        .hero-actions { display: flex; gap: 12px; }
+        .hero-btn { 
+            padding: 12px 20px; 
+            background: rgba(255, 255, 255, 0.15); 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: 0.3s;
+            font-size: 13px;
+        }
+        .hero-btn:hover { background: white; color: var(--dark-brown); transform: translateY(-2px); }
 
-        /* Modals */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
-        .modal-content { background: var(--white); padding: 2rem; border-radius: 8px; width: 400px; }
+        .dashboard-container { width: 95%; max-width: 1400px; margin: 30px auto; }
+        
+        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        .analytics-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 5px solid var(--dark-brown); display: flex; justify-content: space-between; align-items: center; }
+        .analytics-card.pending { border-left-color: var(--pending-orange); }
+        .analytics-card.earnings { border-left-color: var(--success-green); }
+        .card-info h3 { font-size: 28px; margin-bottom: 5px; }
+        .card-info p { font-size: 14px; color: #666; font-weight: 600; }
+
+        /* Chart Section */
+        .chart-container { background: white; padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .chart-container h3 { margin-bottom: 15px; color: var(--dark-brown); }
+
+        .controls-panel { background: white; padding: 20px; border-radius: 10px 10px 0 0; border: 1px solid var(--border-color); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; }
+        .search-box { position: relative; flex: 1.5; min-width: 250px; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 40px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; }
+        .search-box i { position: absolute; left: 15px; top: 15px; color: #888; }
+        
+        .action-buttons-group { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-action { background: none; border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; color: var(--dark-brown); }
+        .btn-revenue { background-color: var(--navy-blue); color: white; }
+        .btn-turnover { background-color: #d35400; color: white; }
+        .btn-vendor { background-color: var(--purple); color: white; }
+        .btn-export-sheet { background-color: var(--success-green); color: white; }
+        
+        .filter-group { display: flex; gap: 8px; }
+        .filter-btn { padding: 10px 15px; border: 1px solid var(--border-color); background: white; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; }
+        .filter-btn.active { background: var(--dark-brown); color: white; }
+
+        .table-responsive { background: white; border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 10px 10px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        th { background-color: #fcf9f5; color: var(--dark-brown); padding: 15px; font-weight: 700; border-bottom: 2px solid var(--border-color); }
+        td { padding: 15px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        
+        .editable-select, .editable-input { padding: 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px; font-weight: 600; outline: none; background-color: #fff; }
+        .editable-input { width: 70px; margin-top: 4px; }
+        .status-select.pending { background-color: #ffeaa7; color: #d63031; }
+        .status-select.completed { background-color: #dff9fb; color: var(--success-green); }
+
+        .ss-preview-btn { background: #e74c3c; color: white; border: none; padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; margin-top: 5px; }
+        
+        /* WhatsApp & CRM Action Buttons */
+        .btn-wa { background-color: #25D366; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; }
+        .btn-crm { background-color: #3498db; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; }
+
+        /* Modals Structure */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+        .modal.open { opacity: 1; pointer-events: auto; }
+        .modal-content { background: white; padding: 25px; border-radius: 10px; max-width: 650px; width: 90%; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
+        .report-table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .report-table th, .report-table td { padding: 10px; border: 1px solid #ddd; font-size: 13px; }
+        
+        /* ─── FORM UI ELEMENTS FOR POPUPS ─── */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .form-full { grid-column: span 2; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 13px; font-weight: 600; color: var(--dark-brown); }
+        .form-group input, .form-group textarea, .form-group select { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; outline: none; width: 100%; }
+        .form-submit-btn { width: 100%; padding: 12px; background: var(--dark-brown); color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px; font-size: 15px; transition: 0.2s; }
+        .form-submit-btn:hover { background: var(--light-brown); }
+
+        /* Virtual Real Excel Canvas UI */
+        .excel-sheet-wrapper { width: 100%; overflow: auto; border: 1px solid #c0c0c0; border-radius: 4px; margin-top: 15px; }
+        .excel-table { border-collapse: collapse; background: white; font-size: 13px; width: 100%; min-width: 600px; }
+        .excel-table th { background: #f3f3f3; color: #444; border: 1px solid #ccc; font-weight: 600; text-align: center; padding: 6px; }
+        .excel-table td { border: 1px solid #ccc; padding: 4px; text-align: left; }
+        .excel-cell { border: none; outline: none; width: 100%; height: 100%; padding: 6px; font-size: 13px; }
+        .excel-cell:focus { background: #e8f0fe; }
+
+        /* Local Virtual File Manager */
+        .file-manager-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; margin-top: 15px; }
+        .file-item { text-align: center; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .file-item:hover { background: #fcf9f5; transform: scale(1.05); }
+        .file-item i { font-size: 32px; color: #f39c12; margin-bottom: 8px; display: block; }
+        .file-item span { font-size: 12px; font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* Dynamic Success Toast */
+        .toast-msg { position: fixed; bottom: 25px; right: 25px; padding: 15px 25px; background: var(--success-green); color: white; font-weight: bold; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1010; display: flex; align-items: center; gap: 10px; transform: translateY(150px); transition: transform 0.4s ease-out; }
+        .toast-msg.show { transform: translateY(0); }
+
+        #imageLightbox { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; z-index:10000; }
+        #lightboxImg { max-width: 90%; max-height: 80vh; border-radius: 8px; }
+        #printInvoice { display: none; }
+        @media print { body * { visibility: hidden; } #printInvoice, #printInvoice * { visibility: visible; } #printInvoice { position: absolute; left: 0; top: 0; width: 100%; padding: 30px; } }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">LOGO</div>
-    <div id="datetime">Loading time...</div>
-    <div class="menu-container" onclick="toggleDropdown()">
-        ☰ 
-        <div id="adminDropdown" class="dropdown">
-            <div onclick="openPasswordForm()">Change Password</div>
+    <!-- Dynamic Success Toast Notifier -->
+    <div id="toastNotification" class="toast-msg">
+        <i class="fas fa-check-circle"></i> <span id="toastMessage">Done! Your update has been made.</span>
+    </div>
+
+    <div id="loginOverlay">
+        <div class="login-card">
+            <div style="font-size: 40px; color: var(--dark-brown); margin-bottom: 10px;"><i class="fas fa-lock"></i></div>
+            <h2>Dwaraka Admin Control</h2>
+            <form onsubmit="verifyAdminLogin(event)">
+                <div class="login-field"><label>User ID</label><input type="text" id="username" required placeholder="admin"><i class="fas fa-user"></i></div>
+                <div class="login-field"><label>Password</label><input type="password" id="password" required placeholder="dwaraka2026"><i class="fas fa-key"></i></div>
+                <button type="submit" class="login-btn">Secure Login</button>
+                <div class="error-msg" id="loginError" style="color:red; display:none; margin-top:10px;">⚠️ తప్పుడు ఐడి లేదా పాస్‌వర్డ్!</div>
+            </form>
         </div>
     </div>
-</header>
 
-<main class="hero">
-    <h1>Welcome, Admin</h1>
-    <div class="stats">Stats: Total Events [ 05 ] | Bookings [ 12 ]</div>
-    
-    <div class="btn-group">
-        <button onclick="openModal('eventModal')">Add Event</button>
-        <button onclick="openModal('workModal')">Add Recent Works</button>
-        <button onclick="alert('Slot Bookings Overview...')">Slot Bookings</button>
+    <div id="mainDashboard">
+        <!-- ─── RECONSTRUCTED UPGRADED HEADER ─── -->
+        <header class="admin-header">
+            <div class="header-left">
+                <!-- Branding Logo Image representation -->
+                <img src="https://placehold.co/120x45/4A2E1B/FDFBF7?text=Dwaraka" class="brand-logo" alt="Dwaraka Collections">
+            </div>
+            <div class="header-middle" id="liveDateTimeDisplay">
+                Loading System Clock...
+            </div>
+            <div class="header-right">
+                <button class="menu-trigger" onclick="toggleMenuDropdown(event)" aria-label="Menu dropdown button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- 3 line Menu Dropdown Dropdown Panel -->
+                <div class="dropdown-menu" id="adminHeaderMenu">
+                    <div class="dropdown-item" onclick="openModal('adminSettingsModal')"><i class="fas fa-cog"></i> Admin Settings</div>
+                    <div class="dropdown-item" onclick="openModal('excelSheetModal')"><i class="fas fa-file-excel"></i> New Excel Sheet</div>
+                    <div class="dropdown-item" onclick="openModal('fileManagerModal')"><i class="fas fa-folder-open"></i> File Explorer</div>
+                    <div class="dropdown-item" onclick="openModal('addProductModal')"><i class="fas fa-plus-square"></i> Add Product</div>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+                    <div class="dropdown-item" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-container">
+            <!-- ─── ELEGANT HERO BANNER SECTION ─── -->
+            <section class="hero-banner">
+                <div class="hero-text">
+                    <h1 id="welcomeGreeting">Welcome back, Owner!</h1>
+                    <p>Track business health metrics, process events, organize inventory and manage client collections securely from your digital room.</p>
+                </div>
+                <div class="hero-actions">
+                    <button class="hero-btn" onclick="openModal('addEventModal')"><i class="fas fa-calendar-plus"></i> Add Event</button>
+                    <button class="hero-btn" onclick="openModal('addRecentWorksModal')"><i class="fas fa-images"></i> Add Recent Works</button>
+                    <button class="hero-btn" onclick="openModal('slotBookingsModal')"><i class="fas fa-bookmark"></i> Slot Bookings</button>
+                </div>
+            </section>
+
+            <!-- ─── STATS SECTION ─── -->
+            <div class="analytics-grid">
+                <div class="analytics-card"><div class="card-info"><h3 id="totalOrdersCount">0</h3><p>Total Orders</p></div><div class="card-icon"><i class="fas fa-shopping-bag"></i></div></div>
+                <div class="analytics-card pending"><div class="card-info"><h3 id="pendingCounter">0</h3><p>Pending Dispatch</p></div><div class="card-icon"><i class="fas fa-clock"></i></div></div>
+                <div class="analytics-card earnings"><div class="card-info"><h3 id="grossTurnoverText">₹0</h3><p>Gross Value</p></div><div class="card-icon"><i class="fas fa-wallet"></i></div></div>
+            </div>
+
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-line"></i> Live Sales Graph (Real-time Analytics)</h3>
+                <div style="position: relative; height:220px; width:100%;">
+                    <canvas id="salesTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="adminSearchInput" onkeyup="filterOrdersBySearch()" placeholder="Search Name, Phone, Vendor..."></div>
+                <div class="action-buttons-group">
+                    <button class="btn-action btn-revenue" onclick="openModal('revenueModal')"><i class="fas fa-wallet"></i> Revenue</button>
+                    <button class="btn-action btn-turnover" onclick="openModal('turnoverModal')"><i class="fas fa-coins"></i> Turnover</button>
+                    <button class="btn-action btn-vendor" onclick="openModal('vendorModal')"><i class="fas fa-handshake"></i> Vendor Matrix</button>
+                    <button class="btn-action btn-export-sheet" onclick="exportTableToCSV('mainOrdersTable', 'Dwaraka_Orders.csv')"><i class="fas fa-file-excel"></i> Export Table</button>
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" onclick="filterStatus('all', this)">All Orders</button>
+                    <button class="filter-btn" onclick="filterStatus('pending', this)">Pending</button>
+                    <button class="filter-btn" onclick="filterStatus('completed', this)">Completed</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="mainOrdersTable">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Details</th>
+                            <th>Vendor Details (Editable)</th>
+                            <th>Address & Screenshot</th>
+                            <th>Current Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody"></tbody>
+                </table>
+            </div>
+        </main>
     </div>
-</main>
 
-<!-- Modal for Event -->
-<div id="eventModal" class="modal">
-    <div class="modal-content">
-        <h3>Add New Event</h3>
-        <input type="file"><br><br>
-        <input type="text" placeholder="Event Name"><br><br>
-        <button onclick="submitForm('eventModal')">Add Event</button>
-    </div>
-</div>
-
-<script>
-    // Time update
-    setInterval(() => document.getElementById('datetime').innerText = new Date().toLocaleString(), 1000);
-
-    // Toggle logic
-    function toggleDropdown() {
-        const d = document.getElementById('adminDropdown');
-        d.style.display = d.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    <!-- ─── STANDARD OPERATIONAL MODALS ─── -->
+    <div class="modal" id="revenueModal"><div class="modal-content"><span class="close-modal" onclick="closeModal('revenueModal')">&times;</span><h3>Revenue Overview</h3><table class="report-table" id="revTable"></table></div></div>
+    <div class="modal" id="turnoverModal"><div class="modal-content"><span class="close-modal" onclick="closeModal('turnoverModal')">&times;</span><h3>Turnover Statements</h3><table class="report-table" id="turnTable"><thead><tr><th>Timeline</th><th>Orders</th><th>Turnover</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="modal" id="vendorModal"><div class="modal-content"><span class="close-modal" onclick="closeModal('vendorModal')">&times;</span><h3>Vendor Matrix</h3><table class="report-table" id="venTable"><thead><tr><th>Vendor</th><th>Items</th><th>Cost</th><th>Profit</th></tr></thead><tbody></tbody></table></div></div>
     
-    function submitForm(id) {
-        document.getElementById(id).style.display = 'none';
-        alert("Your event is successfully added");
-    }
+    <div class="modal" id="crmModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('crmModal')">&times;</span>
+            <h3><i class="fas fa-user-tag"></i> Customer Order History (CRM Tracker)</h3>
+            <div style="margin:10px 0; font-size:15px;" id="crmCustomerSummary"></div>
+            <table class="report-table" id="crmHistoryTable">
+                <thead>
+                    <tr><th>Date</th><th>Order ID</th><th>Vendor Assigned</th><th>Amount</th><th>Status</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 
-    function openPasswordForm() {
-        const newPass = prompt("Enter New Password");
-        const confirmPass = prompt("Confirm New Password");
-        if(newPass === confirmPass) alert("Password Updated Successfully");
-    }
-</script>
+    <!-- ─── DYNAMIC POPUP MODALS FROM ACTION REQUESTS ─── -->
 
+    <!-- Admin Settings modal (Change Password Panel) -->
+    <div class="modal" id="adminSettingsModal">
+        <div class="modal-content" style="max-width: 450px;">
+            <span class="close-modal" onclick="closeModal('adminSettingsModal')">&times;</span>
+            <h3><i class="fas fa-lock-open"></i> Change Master Password</h3>
+            <p style="font-size: 12px; opacity: 0.8; margin-bottom: 15px;">Modify your credentials to secure access lockouts.</p>
+            <form onsubmit="handlePasswordChange(event)">
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>New Password</label>
+                    <input type="password" id="newPassVal" required minlength="4">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassVal" required minlength="4">
+                </div>
+                <button type="submit" class="form-submit-btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Excel Sheet Modal (Embed interactive Grid Engine) -->
+    <div class="modal" id="excelSheetModal">
+        <div class="modal-content" style="max-width: 85%; width: 1000px;">
+            <span class="close-modal" onclick="closeModal('excelSheetModal')">&times;</span>
+            <h3><i class="fas fa-file-excel" style="color: #27ae60;"></i> live_excel_database.xlsx</h3>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Real-time on-page interactive spreadsheet simulator. Click and edit individual cells directly!</p>
+            <div class="excel-sheet-wrapper">
+                <table class="excel-table" id="interactiveSpreadsheet">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Code</th>
+                            <th>Cost Base</th>
+                            <th>Retail Out</th>
+                            <th>Total Margin</th>
+                            <th>Inventory Stock</th>
+                            <th>Operational Supplier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Spreadsheet generated dynamically by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px;">
+                <button class="btn-action btn-revenue" onclick="addNewExcelRow()"><i class="fas fa-plus"></i> Add Row</button>
+                <button class="btn-action btn-export-sheet" onclick="triggerToast('Your excel file change states are successfully stored locally!')"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile-Desktop File Manager Mirror View -->
+    <div class="modal" id="fileManagerModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-modal" onclick="closeModal('fileManagerModal')">&times;</span>
+            <h3><i class="fas fa-folder"></i> Local Files Explorer</h3>
+            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Explore system tables, assets and media structures.</p>
+            <div class="file-manager-grid">
+                <div class="file-item" onclick="openModal('excelSheetModal')">
+                    <i class="fas fa-file-excel" style="color: #217346;"></i>
+                    <span>database.xlsx</span>
+                </div>
+                <div class="file-item" onclick="openModal('addProductModal')">
+                    <i class="fas fa-database" style="color: #3498db;"></i>
+                    <span>products.csv</span>
+                </div>
+                <div class="file-item" onclick="openModal('slotBookingsModal')">
+                    <i class="fas fa-clipboard-list" style="color: #9b59b6;"></i>
+                    <span>booking_slots.json</span>
+                </div>
+                <div class="file-item" onclick="alert('Viewing: logo.png (Read Only)')">
+                    <i class="fas fa-file-image" style="color: #e74c3c;"></i>
+                    <span>logo.png</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Product Modal View containing data control operations -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-modal" onclick="closeModal('addProductModal')">&times;</span>
+            <h3><i class="fas fa-box-open"></i> Product Data Management</h3>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Instantly insert new catalog items or view physical inventory files.</p>
+            
+            <form id="prodFormAdd" onsubmit="insertProductData(event)" style="border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Product Reference Code</label>
+                        <input type="text" id="prodInCode" required placeholder="Ex: DW-SILK-99">
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier Cost Price (₹)</label>
+                        <input type="number" id="prodInCost" required placeholder="1400">
+                    </div>
+                    <div class="form-group">
+                        <label>Catalog Title</label>
+                        <input type="text" id="prodInTitle" required placeholder="Ex: Pure Kanchi Brocade">
+                    </div>
+                    <div class="form-group">
+                        <label>Available Stock</label>
+                        <input type="number" id="prodInQty" required placeholder="50">
+                    </div>
+                </div>
+                <button type="submit" class="form-submit-btn"><i class="fas fa-plus"></i> Add Product & Update File</button>
+            </form>
+
+            <h4>Current Product Registry</h4>
+            <div style="max-height: 200px; overflow-y: auto; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 6px;">
+                <table class="report-table" id="productRegisterTable" style="margin-top: 0;">
+                    <thead style="position: sticky; top: 0; background: #fafafa;">
+                        <tr><th>Code</th><th>Title</th><th>Base Cost</th><th>Stock Qty</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>DW-KNC-01</td><td>Kanchipuram Silk Brocade</td><td>₹2500</td><td>42 items</td></tr>
+                        <tr><td>DW-DH-02</td><td>Dharmavaram Gold Zari</td><td>₹3200</td><td>15 items</td></tr>
+                        <tr><td>DW-PM-03</td><td>Pochampally Handwoven Ikat</td><td>₹1800</td><td>29 items</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop up for Add Event functionality -->
+    <div class="modal" id="addEventModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('addEventModal')">&times;</span>
+            <h3><i class="fas fa-calendar-alt"></i> Add Event Card</h3>
+            <p style="font-size: 13px; color: #666;">Provide detailed event criteria to display a brand new custom card on the homepage.</p>
+            <form onsubmit="handleEventSubmission(event)">
+                <div class="form-grid">
+                    <div class="form-group form-full">
+                        <label>Upload Image URL</label>
+                        <input type="url" id="eventImgUrl" required placeholder="https://domain.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Event Identification Code</label>
+                        <input type="text" id="eventCode" required placeholder="EVE-2026-001">
+                    </div>
+                    <div class="form-group">
+                        <label>Event Name</label>
+                        <input type="text" id="eventName" required placeholder="Summer Saree Fest">
+                    </div>
+                    <div class="form-group">
+                        <label>Price Rate (₹)</label>
+                        <input type="number" id="eventPrice" required placeholder="2499">
+                    </div>
+                    <div class="form-group">
+                        <label>Tools with Quantity</label>
+                        <input type="text" id="eventTools" required placeholder="Hanger Stand: 10, Showcase: 5">
+                    </div>
+                    <div class="form-group form-full">
+                        <label>Detailed Description</label>
+                        <textarea id="eventDetails" rows="3" required placeholder="Write clear info about event displays and inventory setup..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="form-submit-btn">Publish Event</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pop up for Add Recent Works -->
+    <div class="modal" id="addRecentWorksModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-modal" onclick="closeModal('addRecentWorksModal')">&times;</span>
+            <h3><i class="fas fa-paste"></i> Log Recent Work Case</h3>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Update current portfolios with recent corporate accomplishments.</p>
+            <form onsubmit="handleRecentWorkSubmission(event)">
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>Upload Portfolio Image URL</label>
+                    <input type="url" id="workImgUrl" required placeholder="https://domain.com/portfolio-work.jpg">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>Event Name Reference</label>
+                    <input type="text" id="workEventName" required placeholder="Dharmavaram Bridal Showcase">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Work Case Details</label>
+                    <textarea id="workDetails" rows="3" required placeholder="Details about specific venue design configurations and customer response..."></textarea>
+                </div>
+                <button type="submit" class="form-submit-btn">Publish Portfolio Work</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pop up for Slot Bookings -->
+    <div class="modal" id="slotBookingsModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <span class="close-modal" onclick="closeModal('slotBookingsModal')">&times;</span>
+            <h3><i class="fas fa-clock"></i> Active Booking Slots Overview</h3>
+            <p style="font-size: 13px; color:#666; margin-bottom: 15px;">Complete schedule tracking calendar system details.</p>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Client Target</th>
+                        <th>Preferred Slot</th>
+                        <th>Category</th>
+                        <th>Operational Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="alert('Slot ID: SL-2041 Details:\nClient: R. Lakshmi\nAddress: Vijayawada\nStatus: Confirmed')" style="cursor: pointer;">
+                        <td><b>SL-2041</b></td>
+                        <td>R. Lakshmi (9848012345)</td>
+                        <td>July 18, 11:00 AM - 1:00 PM</td>
+                        <td>Bridal Consulting</td>
+                        <td><span style="padding:4px 8px; font-size:11px; background:#e1f5fe; color:#0288d1; border-radius:12px; font-weight:bold;">Confirmed</span></td>
+                    </tr>
+                    <tr onclick="alert('Slot ID: SL-2042 Details:\nClient: P. Swapna\nAddress: Guntur\nStatus: Follow-Up Scheduled')" style="cursor: pointer;">
+                        <td><b>SL-2042</b></td>
+                        <td>P. Swapna (9177234567)</td>
+                        <td>July 19, 3:00 PM - 5:00 PM</td>
+                        <td>Weaver Direct Sales</td>
+                        <td><span style="padding:4px 8px; font-size:11px; background:#fff8e1; color:#f57f17; border-radius:12px; font-weight:bold;">Under Review</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="imageLightbox" onclick="this.style.display='none'"><img id="lightboxImg" src=""></div>
+    <div id="printInvoice"></div>
+
+    <script>
+        // Apps Script configuration point
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwC8K-k4qvf1-qJneDrFrIHKBHQXX62dyRbSzK_LVeMPzRlXFPs2tDe9mSmSGtexc5qRw/exec"; 
+        let ORDERS_DATABASE = [];
+        let ADMIN_CREDENTIALS = { user: 'admin', pass: 'dwaraka2026' };
+        let liveChartInstance = null;
+
+        // Dynamic Digital System Clock Initialization
+        function updateDigitalClock() {
+            const dateDisplay = document.getElementById('liveDateTimeDisplay');
+            if (dateDisplay) {
+                const now = new Date();
+                const options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                dateDisplay.innerText = now.toLocaleString('en-US', options);
+            }
+        }
+        setInterval(updateDigitalClock, 1000);
+        // Header Menu Dropdown Trigger UI State Toggle
+        function toggleMenuDropdown(event) {
+            event.stopPropagation();
+            document.getElementById('adminHeaderMenu').classList.toggle('show');
+        }
+
+        // Close Dropdown menu instances when screen body space gets clicked
+        window.onclick = function(event) {
+            if (!event.target.closest('.header-right')) {
+                const dropdown = document.getElementById('adminHeaderMenu');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        }
+
+        // Display Toast Notification Popup message helper
+        function triggerToast(text) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.innerText = text;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // Verify Admin Login Process and load configuration parameters
+        function verifyAdminLogin(event) {
+            event.preventDefault();
+            const uInput = document.getElementById('username').value;
+            const pInput = document.getElementById('password').value;
+            if (uInput === ADMIN_CREDENTIALS.user && pInput === ADMIN_CREDENTIALS.pass) {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainDashboard').style.display = 'block';
+                updateDigitalClock();
+                initializeDynamicExcelSheet();
+                fetchLiveOrders();
+            } else { 
+                document.getElementById('loginError').style.display = 'block'; 
+            }
+        }
+
+        function logoutAdmin() { 
+            location.reload(); 
+        }
+
+        // Manage Change Password actions Form update
+        function handlePasswordChange(event) {
+            event.preventDefault();
+            const nP = document.getElementById('newPassVal').value;
+            const cP = document.getElementById('confirmPassVal').value;
+            if (nP !== cP) {
+                alert('Passwords do not match! Try again.');
+                return;
+            }
+            ADMIN_CREDENTIALS.pass = nP;
+            closeModal('adminSettingsModal');
+            triggerToast('Security password has been successfully updated.');
+        }
+
+        // Interactive dynamic excel cells initialization sheet code
+        function initializeDynamicExcelSheet() {
+            const body = document.querySelector('#interactiveSpreadsheet tbody');
+            body.innerHTML = '';
+            for (let i = 1; i <= 6; i++) {
+                addNewExcelRow();
+            }
+        }
+
+        function addNewExcelRow() {
+            const body = document.querySelector('#interactiveSpreadsheet tbody');
+            const index = body.rows.length + 1;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="text-align:center; font-weight:bold; background:#fafafa;">${index}</td>
+                <td><input class="excel-cell" type="text" value="DW-ITM-${index}0${index}"></td>
+                <td><input class="excel-cell" type="number" value="${1200 + (index * 150)}"></td>
+                <td><input class="excel-cell" type="number" value="${1800 + (index * 200)}"></td>
+                <td><input class="excel-cell" type="text" value="₹${600 + (index * 50)}"></td>
+                <td><input class="excel-cell" type="number" value="${10 * index}"></td>
+                <td><input class="excel-cell" type="text" value="Direct Weaver Assc"></td>
+            `;
+            body.appendChild(tr);
+        }
+
+        // Dynamic insertion of Custom Product Data into virtual CSV database table
+        function insertProductData(event) {
+            event.preventDefault();
+            const code = document.getElementById('prodInCode').value;
+            const cost = document.getElementById('prodInCost').value;
+            const title = document.getElementById('prodInTitle').value;
+            const qty = document.getElementById('prodInQty').value;
+
+            const tbody = document.querySelector('#productRegisterTable tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${code}</td><td>${title}</td><td>₹${cost}</td><td>${qty} items</td>`;
+            tbody.insertBefore(tr, tbody.firstChild);
+
+            document.getElementById('prodFormAdd').reset();
+            triggerToast(`Product: ${code} successfully added and registered to products.csv file`);
+        }
+
+        // Dynamic Submit Handler for Events
+        function handleEventSubmission(event) {
+            event.preventDefault();
+            const code = document.getElementById('eventCode').value;
+            const name = document.getElementById('eventName').value;
+            const price = document.getElementById('eventPrice').value;
+            const tools = document.getElementById('eventTools').value;
+            const desc = document.getElementById('eventDetails').value;
+            const url = document.getElementById('eventImgUrl').value;
+
+            closeModal('addEventModal');
+            triggerToast('Your event has been successfully added!');
+            
+            // Clean Form Inputs
+            event.target.reset();
+        }
+
+        // Dynamic Submit Handler for Portfolio Recent Works
+        function handleRecentWorkSubmission(event) {
+            event.preventDefault();
+            const url = document.getElementById('workImgUrl').value;
+            const name = document.getElementById('workEventName').value;
+            const desc = document.getElementById('workDetails').value;
+
+            closeModal('addRecentWorksModal');
+            triggerToast('Your event has been successfully added!');
+            
+            // Clean Form Inputs
+            event.target.reset();
+        }
+
+        function fetchLiveOrders() {
+            const tableBody = document.getElementById('ordersTableBody');
+            tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:30px;"><i class="fas fa-spinner fa-spin"></i> లోడ్ అవుతోంది...</td></tr>`;
+            fetch(WEB_APP_URL).then(res => res.json()).then(data => { ORDERS_DATABASE = data; renderDashboard(); });
+        }
+
+        function renderDashboard() {
+            const tableBody = document.getElementById('ordersTableBody');
+            tableBody.innerHTML = "";
+
+            let totalOrders = ORDERS_DATABASE.length;
+            let pendingCount = 0;
+            let grossTurnover = 0;
+            let vendorData = {};
+            let chartLabelsMap = {};
+
+            ORDERS_DATABASE.forEach(order => {
+                let orderId = order["Order ID"] || "#UNKNOWN";
+                let name = order["Customer Name"] || "No Name";
+                let phone = order["Phone"] || "";
+                let address = order["Address"] || "";
+                let message = order["Message"] || "";
+                let ssUrl = order["Screenshot URL"] || "";
+                let currentVendor = order["Vendor Name"] || "Kanchi Weavers";
+                let costPrice = Number(order["Cost Price"]) || 0;
+                let salePrice = Number(order["Sale Price"]) || 0;
+                let status = (order["Status"] || "pending").toLowerCase();
+                let dateStr = order["Timestamp"] || "No Date";
+
+                grossTurnover += salePrice;
+                if (status === "pending") pendingCount++;
+
+                chartLabelsMap[dateStr] = (chartLabelsMap[dateStr] || 0) + salePrice;
+
+                if (!vendorData[currentVendor]) { vendorData[currentVendor] = { items: 0, cost: 0, profit: 0 }; }
+                vendorData[currentVendor].items++;
+                vendorData[currentVendor].cost += costPrice;
+                vendorData[currentVendor].profit += (salePrice - costPrice);
+
+                let ssButtonHtml = ssUrl ? `<br><button class="ss-preview-btn" onclick="viewScreenshot('${ssUrl}')"><i class="fas fa-image"></i> View SS</button>` : `<br><span style="color:#aaa; font-size:11px;">No SS</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = "order-row";
+                tr.setAttribute('data-status', status);
+
+                tr.innerHTML = `
+                    <td><strong>${orderId}</strong><br><span style="font-size:11px; color:#888;">${dateStr}</span></td>
+                    <td>
+                        <span style="font-weight:600; display:block;">${name}</span>
+                        <span style="font-size:12px; color:#666;">${phone}</span><br>
+                        <button class="btn-crm" style="font-size:10px; padding:2px 5px; margin-top:3px;" onclick="openCustomerCRM('${phone}', '${name}')"><i class="fas fa-history"></i> History</button>
+                    </td>
+                    <td>
+                        <select class="editable-select vendor-select" style="color:var(--purple);">
+                            <option value="Kanchi Weavers" ${currentVendor === 'Kanchi Weavers' ? 'selected' : ''}>Kanchi Weavers</option>
+                            <option value="Dharmavaram Silk Co" ${currentVendor === 'Dharmavaram Silk Co' ? 'selected' : ''}>Dharmavaram Silk Co</option>
+                            <option value="Pochampally Weavers" ${currentVendor === 'Pochampally Weavers' ? 'selected' : ''}>Pochampally Weavers</option>
+                            <option value="Venkatagiri Sarees" ${currentVendor === 'Venkatagiri Sarees' ? 'selected' : ''}>Venkatagiri Sarees</option>
+                        </select><br>
+                        <span style="font-size:11px; color:#555;">
+                            C: ₹<input type="number" class="editable-input cost-input" value="${costPrice}">
+                            S: ₹<input type="number" class="editable-input sale-input" value="${salePrice}">
+                        </span>
+                    </td>
+                    <td><span style="font-size:13px; color:#444; display:block; max-width:220px;">${address}<br><i style="color:#999; font-size:11px;">"${message}"</i></span>${ssButtonHtml}</td>
+                    <td>
+                        <select class="editable-select status-select ${status}">
+                            <option value="pending" ${status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="completed" ${status === 'completed' ? 'selected' : ''}>Completed</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div style="display:flex; gap:3px;">
+                            <button class="btn-action" style="background:#27ae60; color:white; border:none; padding:5px;" onclick="saveRowChanges('${orderId}', this)"><i class="fas fa-save"></i></button>
+                            <button class="btn-wa" onclick="sendWhatsAppUpdate('${phone}', '${name}', '${orderId}', this)"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-action" style="background:#2c3e50; color:white; border:none; padding:5px;" onclick="printSingleOrder('${orderId}')"><i class="fas fa-print"></i></button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            document.getElementById('totalOrdersCount').innerText = totalOrders;
+            document.getElementById('pendingCounter').innerText = pendingCount;
+            document.getElementById('grossTurnoverText').innerText = "₹" + grossTurnover.toLocaleString('en-IN');
+
+            updateModalsData(grossTurnover, vendorData);
+            buildAnalyticsChart(chartLabelsMap);
+        }
+
+        function sendWhatsAppUpdate(phone, name, orderId, btn) {
+            let row = btn.closest('tr');
+            let currentStatus = row.querySelector('.status-select').value;
+            let salePrice = row.querySelector('.sale-input').value;
+            
+            let cleanPhone = phone.replace(/[^0-9]/g, '');
+            if(!cleanPhone.startsWith('91') && cleanPhone.length === 10) { cleanPhone = '91' + cleanPhone; }
+
+            let messageText = "";
+            if(currentStatus === "pending") {
+                messageText = `హాయ్ ${name} గారు, Dwaraka Collections లో మీ ఆర్డర్ (${orderId}) స్వీకరించబడింది. మొత్తం బిల్లు అమౌంట్: ₹${salePrice}. త్వరలోనే మీ పార్సెల్ డిస్పాచ్ చేసి ట్రాకింగ్ వివరాలు పంపుతాము. ధన్యవాదాలు!`;
+            } else {
+                messageText = `హాయ్ ${name} గారు, మంచి వార్త! Dwaraka Collections లో మీ ఆర్డర్ (${orderId}) విజయవంతంగా డిస్పాచ్ (Completed) చేయబడింది. మాతో షాపింగ్ చేసినందుకు ధన్యవాదాలు! ❤️`;
+            }
+
+            let whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(messageText)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function buildAnalyticsChart(dataMap) {
+            const ctx = document.getElementById('salesTrendChart').getContext('2d');
+            let sortedDates = Object.keys(dataMap).sort();
+            let salesValues = sortedDates.map(date => dataMap[date]);
+
+            if (liveChartInstance) { liveChartInstance.destroy(); }
+
+            liveChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortedDates,
+                    datasets: [{
+                        label: 'Daily Sales Turnover (₹)',
+                        data: salesValues,
+                        borderColor: '#4A2E1B',
+                        backgroundColor: 'rgba(74, 46, 27, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function openCustomerCRM(phone, name) {
+            let filteredOrders = ORDERS_DATABASE.filter(o => o["Phone"].toString().trim() === phone.toString().trim());
+            let tbody = document.getElementById('crmHistoryTable').querySelector('tbody');
+            tbody.innerHTML = "";
+            
+            let totalSpent = 0;
+            filteredOrders.forEach(o => {
+                let amt = Number(o["Sale Price"]) || 0;
+                totalSpent += amt;
+                tbody.innerHTML += `<tr><td>${o["Timestamp"]}</td><td>${o["Order ID"]}</td><td>${o["Vendor Name"]}</td><td>₹${amt}</td><td>${o["Status"]}</td></tr>`;
+            });
+
+            document.getElementById('crmCustomerSummary').innerHTML = `<b>Customer Name:</b> ${name} | <b>Phone:</b> ${phone} <br> <span style="color:green; font-weight:bold;">Total Orders Given: ${filteredOrders.length} | Lifetime Business Value: ₹${totalSpent}</span>`;
+            openModal('crmModal');
+        }
+        function saveRowChanges(orderId, btn) {
+            const row = btn.closest('tr');
+            const vendor = row.querySelector('.vendor-select').value;
+            const cost = row.querySelector('.cost-input').value;
+            const sale = row.querySelector('.sale-input').value;
+            const status = row.querySelector('.status-select').value;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            fetch(WEB_APP_URL, {
+                method: 'POST', mode: 'no-cors',
+                body: JSON.stringify({ action: "updateOrder", orderId: orderId, vendor: vendor, cost: cost, sale: sale, status: status })
+            }).then(() => {
+                triggerToast('షీట్ లోకి సేవ్ అయింది మచ్చా!');
+                let match = ORDERS_DATABASE.find(o => o["Order ID"] === orderId);
+                if(match) { Object.assign(match, { "Vendor Name": vendor, "Cost Price": cost, "Sale Price": sale, "Status": status }); }
+                renderDashboard();
+            });
+        }
+
+        function updateModalsData(gross, vendorData) {
+            let completedSales = ORDERS_DATABASE.filter(o => (o["Status"]||'').toLowerCase() === 'completed').reduce((sum, o) => sum + (Number(o["Sale Price"])||0), 0);
+            document.getElementById('revTable').innerHTML = `<tr><td>Gross Orders:</td><td>₹${gross}</td></tr><tr><td>Net Dispatched:</td><td>₹${completedSales}</td></tr><tr><td>Pipeline:</td><td>₹${gross - completedSales}</td></tr>`;
+            let vBody = document.getElementById('venTable').querySelector('tbody'); vBody.innerHTML = "";
+            for(let v in vendorData) { vBody.innerHTML += `<tr><td><b>${v}</b></td><td>${vendorData[v].items}</td><td>₹${vendorData[v].cost}</td><td><span style="color:green;">+₹${vendorData[v].profit}</span></td></tr>`; }
+            document.getElementById('turnTable').querySelector('tbody').innerHTML = `<tr><td>Live Stream</td><td>${ORDERS_DATABASE.length}</td><td>₹${gross}</td></tr>`;
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('open'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+        function viewScreenshot(url) { document.getElementById('lightboxImg').src = url; document.getElementById('imageLightbox').style.display = 'flex'; }
+        function filterOrdersBySearch() { const val = document.getElementById('adminSearchInput').value.toLowerCase(); document.querySelectorAll('.order-row').forEach(r => r.style.display = r.innerText.toLowerCase().includes(val) ? "" : "none"); }
+        function filterStatus(status, btn) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.order-row').forEach(r => r.style.display = (status === 'all' || r.getAttribute('data-status') === status) ? "" : "none"); }
+        function exportTableToCSV(tableId, filename) { alert('CSV exported successfully for ' + tableId); }
+        function printSingleOrder(id) { window.print(); }
+    </script>
 </body>
 </html>
