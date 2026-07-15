@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAPPY DAYS DECORS</title>
+    <title>Dwaraka Collections</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -40,7 +40,7 @@
 
         header {
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
-                        url('image/file_00000000359071fbbad823e939606486.png') no-repeat center top;
+                        url('file_0000000019b07208b24bcdfb699c657c.png') no-repeat center top;
             background-size: cover;
             width: 100%;
             min-height: 280px;
@@ -194,7 +194,6 @@
             transform: scale(1.2);
         }
 
-        /* Backdrop Overlay for Menu & Modals */
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -232,7 +231,6 @@
             margin-bottom: 25px;
         }
 
-        /* SECTION HEADER STANDARD */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -247,7 +245,7 @@
             padding-left: 10px;
         }
 
-        /* MATCHED CARDS GRID STYLE */
+        /* CARDS GRID STYLE */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -255,7 +253,6 @@
             margin: 20px 0 40px 0;
         }
 
-        /* Sized exactly same as .work-card */
         .product-card {
             background: white;
             border: 1px solid var(--border-color);
@@ -273,7 +270,6 @@
             box-shadow: 0 8px 16px rgba(74, 46, 27, 0.1);
         }
 
-        /* Image matching exact work container height (200px) */
         .card-img-container {
             position: relative;
             height: 200px;
@@ -292,7 +288,6 @@
             transform: scale(1.05);
         }
 
-        /* Padding details matched with work-details */
         .card-body {
             padding: 15px;
             flex-grow: 1;
@@ -305,7 +300,35 @@
             color: var(--text-dark);
             font-size: 16px;
             font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-code {
+            font-size: 11px;
+            color: #888;
+            font-weight: bold;
+            text-transform: uppercase;
             margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-price-wrapper {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .price-discounted {
+            color: var(--dark-brown);
+            font-weight: 700;
+            font-size: 17px;
         }
 
         .card-description {
@@ -396,7 +419,6 @@
             font-weight: 600;
         }
 
-        /* View More Arrow Indication Elements */
         .scroll-indicator-arrow {
             position: absolute;
             right: -15px;
@@ -574,7 +596,6 @@
             transform: scale(1.2);
         }
 
-        /* TOOLS TABLE STYLE IN POPUP */
         .tools-table {
             width: 100%;
             border-collapse: collapse;
@@ -593,7 +614,6 @@
             color: var(--dark-brown);
         }
 
-        /* Roadmap UI Design */
         .roadmap-wrap {
             background-color: #FAF8F5;
             padding: 40px 20px;
@@ -749,6 +769,12 @@
             font-size: 14px;
         }
 
+        .form-group input:disabled {
+            background-color: #f5f5f5;
+            color: #777;
+            cursor: not-allowed;
+        }
+
         .submit-btn {
             background-color: var(--dark-brown);
             color: white;
@@ -775,7 +801,6 @@
             color: #888;
         }
 
-        /* Success screen styling */
         .success-box {
             text-align: center;
             padding: 20px 0;
@@ -855,10 +880,10 @@
         <div class="side-menu-socials">
              <h5>Follow Us</h5>
              <div class="social-icons-row">
-                 <a href="https://instagram.com/happydaysdecors" target="_blank">
+                 <a href="https://instagram.com/yourpage" target="_blank">
                      <i class="fab fa-instagram"></i>
                  </a>
-                 <a href="https://wa.me/919908180194" target="_blank">
+                 <a href="https://wa.me/919876543210" target="_blank">
                      <i class="fab fa-whatsapp"></i>
                  </a>
                  <a href="https://facebook.com/yourpage" target="_blank">
@@ -871,16 +896,16 @@
     <header>
         <div class="container" style="display: flex; flex-direction: column; height: 100%; justify-content: space-between; flex-grow: 1;">
             <div class="header-top-bar">
-                <div class="brand-title-mini">HAPPY DAYS DECORS</div>
+                <div class="brand-title-mini">Dwaraka Collections</div>
                 <button class="menu-btn-small" onclick="openSideMenu()">☰ Menu</button>
             </div>
 
             <div class="header-stats-bar">
                 <div class="stat-item">
-                    <i class="fab fa-instagram"></i> 0 Followers
+                    <i class="fab fa-instagram"></i> 12.5K Followers
                 </div>
                 <div class="stat-item">
-                    <i class="fas fa-users"></i> 0 Customers
+                    <i class="fas fa-users"></i> 3200 Customers
                 </div>
             </div>
         </div>
@@ -888,72 +913,63 @@
 
     <main class="container view-section" id="customerView">
         <div class="welcome-section">
-            <h1>Welcome To Happy Days Decors</h1>
-            <p>Quality Decoration with trusted Decors. Fast delivery and customer support.</p>
+            <h1>Welcome To Dwaraka Collections</h1>
+            <p>Quality products with trusted service. Fast delivery and customer support.</p>
         </div>
 
-        <!-- E-COMMERCE PRODUCTS GRID (Now matching Recent Work Card dimensions perfectly!) -->
+        <!-- E-COMMERCE PRODUCTS GRID WITH PRICES AND PRODUCT CODES -->
         <div class="section-header">
-            <h2>Our Decorations</h2>
+            <h2>Our Collections</h2>
         </div>
         <div class="cards-grid">
-            <div class="product-card" onclick="openProductDetails('Birthday')">
+            <div class="product-card" onclick="openProductDetails('Kanchi Pattu Sarees')">
                 <div class="card-img-container">
-                    <img src="image/file_0000000000d071fa9dd2af0b4fee5d7c.png" alt="Kanchi Saree" class="card-img">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80" alt="Kanchi Saree" class="card-img">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Birthday</h3>
-                    <p class="card-description">Creating unforgettable birthday celebrations with beautiful, customized decorations.</p>
+                    <div>
+                        <div class="card-code">Code: DC-KANCHI</div>
+                        <h3 class="card-title">Kanchi Pattu Sarees</h3>
+                        <div class="card-price-wrapper">
+                            <span class="price-original">₹4999</span>
+                            <span class="price-discounted">₹999</span>
+                        </div>
+                        <p class="card-description">Exclusive traditional pure handloom silk collection with grand gold borders.</p>
+                    </div>
                     <span class="card-action-hint">View Details & Book</span>
                 </div>
             </div>
-            <div class="product-card" onclick="openProductDetails('Aneversary')">
+            <div class="product-card" onclick="openProductDetails('Gadwal Cotton Silk')">
                 <div class="card-img-container">
-                    <img src="image/file_00000000946071fda2a45b73b910e960.png" alt="Gadwal Saree" class="card-img">
+                    <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" alt="Gadwal Saree" class="card-img">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Aneversary</h3>
-                    <p class="card-description">Celebrating your Anniversary with Gratitude. Thank You for Making Happy Days Decors a Part of Your Special Moments.</p>
+                    <div>
+                        <div class="card-code">Code: DC-GADWAL</div>
+                        <h3 class="card-title">Gadwal Cotton Silk</h3>
+                        <div class="card-price-wrapper">
+                            <span class="price-original">₹3999</span>
+                            <span class="price-discounted">₹799</span>
+                        </div>
+                        <p class="card-description">Beautiful lightweight cotton borders blended perfectly with traditional silk colors.</p>
+                    </div>
                     <span class="card-action-hint">View Details & Book</span>
                 </div>
             </div>
-            <div class="product-card" onclick="openProductDetails('Baby Shower')">
+            <div class="product-card" onclick="openProductDetails('Fancy Designer Sarees')">
                 <div class="card-img-container">
-                    <img src="image/file_000000002f8c71fdb03cb60a336dc6c5.png" alt="Designer Saree" class="card-img">
+                    <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" alt="Designer Saree" class="card-img">
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Baby Shower</h3>
-                    <p class="card-description">Exclusive Baby Shower Decorations with Elegant Themes & Premium Styling.</p>
-                    <span class="card-action-hint">View Details & Book</span>
-                </div>
-            </div>
-            <div class="product-card" onclick="openProductDetails('Birthday')">
-                <div class="card-img-container">
-                    <img src="image/file_0000000000d071fa9dd2af0b4fee5d7c.png" alt="Kanchi Saree" class="card-img">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Birthday</h3>
-                    <p class="card-description">Creating unforgettable birthday celebrations with beautiful, customized decorations.</p>
-                    <span class="card-action-hint">View Details & Book</span>
-                </div>
-            </div>
-            <div class="product-card" onclick="openProductDetails('Aneversary')">
-                <div class="card-img-container">
-                    <img src="image/file_00000000946071fda2a45b73b910e960.png" alt="Gadwal Saree" class="card-img">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Aneversary</h3>
-                    <p class="card-description">Celebrating your Anniversary with Gratitude. Thank You for Making Happy Days Decors a Part of Your Special Moments.</p>
-                    <span class="card-action-hint">View Details & Book</span>
-                </div>
-            </div>
-            <div class="product-card" onclick="openProductDetails('Baby Shower')">
-                <div class="card-img-container">
-                    <img src="image/file_000000002f8c71fdb03cb60a336dc6c5.png" alt="Designer Saree" class="card-img">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Baby Shower</h3>
-                    <p class="card-description">Exclusive Baby Shower Decorations with Elegant Themes & Premium Styling.</p>
+                    <div>
+                        <div class="card-code">Code: DC-FANCY</div>
+                        <h3 class="card-title">Fancy Designer Sarees</h3>
+                        <div class="card-price-wrapper">
+                            <span class="price-original">₹2999</span>
+                            <span class="price-discounted">₹699</span>
+                        </div>
+                        <p class="card-description">Modern lightweight designs curated specifically for festivals & celebrations.</p>
+                    </div>
                     <span class="card-action-hint">View Details & Book</span>
                 </div>
             </div>
@@ -965,49 +981,44 @@
             </div>
             
             <div class="swipe-container-outer">
-                <!-- Swipe Indicator Arrow -->
                 <div class="scroll-indicator-arrow" onclick="scrollWorksContainer(1)" title="Scroll for more works">
                     <i class="fas fa-chevron-right"></i>
                 </div>
 
                 <div class="swipe-container" id="recentWorksWrapper">
-                    <!-- Card 1 -->
                     <div class="work-card">
                         <div class="work-img-container">
-                            <img src="image/file_0000000000d071fa9dd2af0b4fee5d7c.png" class="work-img" alt="Bridal Design">
+                            <img src="https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Bridal Design">
                         </div>
                         <div class="work-details">
-                            <span class="work-tag">Birthday</span>
-                            <h4 class="work-title">Exclusive Birthday Decoration Work</h4>
+                            <span class="work-tag">Handmade Bridal</span>
+                            <h4 class="work-title">Exclusive Kundan Bridal Border Work</h4>
                         </div>
                     </div>
-                    <!-- Card 2 -->
                     <div class="work-card">
                         <div class="work-img-container">
-                            <img src="image/file_00000000946071fda2a45b73b910e960.png" class="work-img" alt="Silk Masterpiece">
+                            <img src="https://images.unsplash.com/photo-1610030470094-1a3559fb96ef?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Silk Masterpiece">
                         </div>
                         <div class="work-details">
-                            <span class="work-tag">Aniversary</span>
+                            <span class="work-tag">Traditional Silk</span>
                             <h4 class="work-title">Classic Magenta & Pure Gold Zari Weave</h4>
                         </div>
                     </div>
-                    <!-- Card 3 -->
                     <div class="work-card">
                         <div class="work-img-container">
-                            <img src="image/file_000000002f8c71fdb03cb60a336dc6c5.png" class="work-img" alt="Modern Georgette">
+                            <img src="https://images.unsplash.com/photo-1608748010899-18f300247112?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Modern Georgette">
                         </div>
                         <div class="work-details">
-                            <span class="work-tag">Baby Shower</span>
+                            <span class="work-tag">Modern Festive</span>
                             <h4 class="work-title">Pastel Peach Handloom Blend Saree</h4>
                         </div>
                     </div>
-                    <!-- Card 4 -->
                     <div class="work-card">
                         <div class="work-img-container">
-                            <img src="image/file_00000000438071f8aa88b48935ec9b25.png" class="work-img" alt="Floral Embroidery">
+                            <img src="https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=400&q=80" class="work-img" alt="Floral Embroidery">
                         </div>
                         <div class="work-details">
-                            <span class="work-tag">Office Event</span>
+                            <span class="work-tag">Creative Embroidery</span>
                             <h4 class="work-title">Detailed Floral Pattern Motif Threadwork</h4>
                         </div>
                     </div>
@@ -1015,13 +1026,12 @@
             </div>
         </div>
 
-        <!-- NEW: WHAT OUR CUSTOMERS SAY SECTION -->
+        <!-- WHAT OUR CUSTOMERS SAY SECTION -->
         <div class="feedback-section">
             <div class="section-header">
                 <h2>Our Customers What Say</h2>
             </div>
             <div class="feedback-grid">
-                <!-- Review 1 -->
                 <div class="feedback-card">
                     <div>
                         <div class="feedback-stars">
@@ -1041,7 +1051,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Review 2 -->
                 <div class="feedback-card">
                     <div>
                         <div class="feedback-stars">
@@ -1061,7 +1070,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Review 3 -->
                 <div class="feedback-card">
                     <div>
                         <div class="feedback-stars">
@@ -1093,15 +1101,15 @@
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">2</div>
-                    <div class="roadmap-card"><h4>Review Gallery & Tools</h4></div>
+                    <div class="roadmap-card"><h4>Review Gallery & Details</h4></div>
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">3</div>
-                    <div class="roadmap-card"><h4>Click Book Now & Choose Slot</h4></div>
+                    <div class="roadmap-card"><h4>Click Book Now (Product Code Auto-applied)</h4></div>
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">4</div>
-                    <div class="roadmap-card"><h4>Submit Booking</h4></div>
+                    <div class="roadmap-card"><h4>Submit Booking Slot Form</h4></div>
                 </div>
                 <div class="roadmap-node">
                     <div class="roadmap-circle">5</div>
@@ -1113,27 +1121,16 @@
         <div class="info-block" id="aboutSection">
             <h3>About Dwaraka Collections</h3>
             <p style="margin-bottom: 10px;">Dwaraka Collections అనేది చేనేత మరియు సాంప్రదాయ వస్త్రాల రంగంలో ఒక నమ్మకమైన బ్రాండ్. మా క్లయింట్‌లకు అత్యుత్తమ నాణ్యత కలిగిన డిజైన్‌లు, ప్రత్యేకమైన హ్యాండ్లూమ్ డిజైన్‌లు అందించడమే మా ముఖ్య ఉద్దేశ్యం.</p>
-            <p>మేము నేరుగా మా నైపుణ్యం కలిగిన నేత కార్మికుల (Weavers) నుండి సేకరించిన ప్యూర్ కలెక్షన్స్ అందిస్తాము. కలర్స్, క్వాలిటీ మరియు కస్టమర్ సంతృప్తి విషయంలో మేము ఎప్పుడూ రాజీ పడం. ప్రతి ఆర్డర్ సురక్షితమైన ప్యాకింగ్ మరియు ఫాస్ట్ డెలివరీ ద్వారా మీ ముందుకు వస్తుంది.</p>
+            <p>మేము నేరుగా మా నైపుణ్యం కలిగిన నేత కార్మికుల (Weavers) నుండి సేకరించిన ప్యూర్ కలెక్షన్స్ అందిస్తాము. కలర్స్, క్వాలిటీ మరియు కస్టమర్ సంతృప్తి విషయంలో మేము ఎప్పుడూ రాజీ పడం.</p>
         </div>
 
         <div class="info-block" id="faqSection">
             <h3>Frequently Asked Questions (FAQ)</h3>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">Q1. ఆర్డర్ ఎలా సబ్మిట్ చేయాలి? <span>+</span></div>
-                <p class="hidden" style="padding:10px 0; color:#555;">పైన ఉన్న కార్డ్స్‌లో మీకు నచ్చిన దానిపై క్లిక్ చేసి, వివరాలు చూసి 'Book Now' క్లిక్ చేసి నింపవచ్చు.</p>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Q2. డెలివరీకి ఎన్ని రోజులు పడుతుంది? <span>+</span></div>
-                <p class="hidden" style="padding:10px 0; color:#555;">సాధారణంగా ఆర్డర్ లేదా బుకింగ్ చేసిన 4 నుండి 7 పని దినాలలో (Working Days) ప్రొడక్ట్ డెలివరీ చేయబడుతుంది.</p>
+                <p class="hidden" style="padding:10px 0; color:#555;">పైన ఉన్న కార్డ్స్‌లో మీకు నచ్చిన దానిపై క్లిక్ చేసి, వివరాలు చూసి 'Book Now' క్లిక్ చేసి నింపవచ్చు. ప్రొడక్ట్ కోడ్ ఆటోమేటిక్‌గా సేవ్ అవుతుంది.</p>
             </div>
         </div>
-    </main>
-    <main class="container view-section hidden" id="adminView">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h2>Admin Dashboard Control</h2>
-            <button class="submit-btn" style="width:auto; padding:8px 20px; background:#c62828;" onclick="logoutAdmin()">Logout</button>
-        </div>
-        <p>Welcome back, Administrator.</p>
     </main>
 
     <!-- POPUP 1: RICH DETAILS MODAL WITH CAROUSEL -->
@@ -1159,21 +1156,22 @@
                             <th>Quantity</th>
                         </tr>
                     </thead>
-                    <tbody id="toolsList">
-                        <!-- Filled dynamically -->
-                    </tbody>
+                    <tbody id="toolsList"></tbody>
                 </table>
             </div>
             <button class="submit-btn" onclick="openBookingFromDetails()">Book Now</button>
         </div>
     </div>
-
-    <!-- POPUP 2: SLOT BOOKING FORM -->
+    <!-- POPUP 2: SLOT BOOKING FORM WITH STATIC CODE CAPTURE -->
     <div class="modal-overlay hidden" id="bookingModal">
         <div class="modal-content">
             <span class="close-popup" onclick="closeBookingModal()">&times;</span>
             <div class="modal-header">Slot Booking Form</div>
             <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                <div class="form-group">
+                    <label>Selected Product Code</label>
+                    <input type="text" id="bookProductCode" readonly value="" style="font-weight: bold; background: #f0edf0; color: #4A2E1B;">
+                </div>
                 <div class="form-group">
                     <label>Name *</label>
                     <input type="text" id="bookName" required placeholder="Enter your full name">
@@ -1183,25 +1181,26 @@
                     <input type="tel" id="bookContact" required placeholder="Enter contact number">
                 </div>
                 <div class="form-group">
-                    <label>WhatsApp ID / Number *</label>
-                    <input type="text" id="bookWhatsapp" required placeholder="Enter WhatsApp ID or Number">
+                    <label>WhatsApp Number *</label>
+                    <input type="text" id="bookWhatsapp" required placeholder="Enter WhatsApp Number">
                 </div>
                 <div class="form-group">
                     <label>Location *</label>
                     <input type="text" id="bookLocation" required placeholder="Enter your city/town name">
                 </div>
                 <div class="form-group">
-                    <label>Date & Time *</label>
+                    <label>Booking Date & Time *</label>
                     <input type="datetime-local" id="bookDateTime" required>
                 </div>
                 <div class="form-group">
-                    <label>Message / Text Notes</label>
+                    <label>Message / Special Notes</label>
                     <textarea id="bookText" rows="3" placeholder="Enter specifications or details..."></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Submit Booking</button>
             </form>
         </div>
     </div>
+
     <!-- POPUP 3: THANK YOU RESPONSE MODAL -->
     <div class="modal-overlay hidden" id="thankYouModal">
         <div class="modal-content" style="max-width: 400px;">
@@ -1249,13 +1248,12 @@
             </div>
             <div class="footer-col">
                 <h4>Contact Support</h4>
-                <p><i class="fas fa-envelope"></i> happydaysdecors@gmail.com</p>
-                <p><i class="fab fa-whatsapp"></i> +91 9908180194</p>
-                <p><i class="fas fa-map-marker-alt"></i> Proddatur, Andhra Pradesh, India</p>
+                <p><i class="fas fa-envelope"></i> info@dwarakacollections.com</p>
+                <p><i class="fab fa-whatsapp"></i> +91 XXXXXXXXXX</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Happy Days Decors. All Rights Reserved.</p>
+            <p>&copy; 2026 Dwaraka Collections. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -1263,47 +1261,46 @@
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYhtVwbJjDjkZA6Dgmom2u15jspiquWpq9psgKEuaQ58XXGfkrv9OmPeGu2nKdmjyYdw/exec";
         
         let selectedProduct = "";
+        let selectedProductCode = "";
         let activeSlideIndex = 0;
         let totalSlides = 0;
 
+        // Static Product Configurations map mapping names directly to consistent Product codes
         const productData = {
             "Kanchi Pattu Sarees": {
+                code: "DC-KANCHI",
                 text: "Indulge in our exquisite traditional royal Kanchi Pattu designs crafted by ancestral handloom weavers.",
                 images: [
                     "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1610030470094-1a3559fb96ef?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1610030470094-1a3559fb96ef?auto=format&fit=crop&w=600&q=80"
                 ],
                 tools: [
                     { name: "Wooden Handloom Weave Loom", qty: "1 Unit" },
-                    { name: "Gold Zari Thread Reels", qty: "12 spools" },
-                    { name: "Raw Mulberry Silk", qty: "5 Bundles" }
+                    { name: "Gold Zari Thread Reels", qty: "12 spools" }
                 ]
             },
             "Gadwal Cotton Silk": {
+                code: "DC-GADWAL",
                 text: "Experience maximum comfort paired with elegant styles. Sourced directly from local cottage weavers.",
                 images: [
                     "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1608748010899-18f300247112?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1608748010899-18f300247112?auto=format&fit=crop&w=600&q=80"
                 ],
                 tools: [
                     { name: "Manual Cotton Loom", qty: "1 Unit" },
-                    { name: "Silk Blend Threads", qty: "8 Colors" },
-                    { name: "Traditional Hand Loom Shuttles", qty: "2 Nos" }
+                    { name: "Silk Blend Threads", qty: "8 Colors" }
                 ]
             },
             "Fancy Designer Sarees": {
+                code: "DC-FANCY",
                 text: "Our vibrant fancy lightweight sarees designed for comfortable parties, celebrations, and events.",
                 images: [
                     "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1583391265517-35bbadd01209?auto=format&fit=crop&w=600&q=80"
                 ],
                 tools: [
                     { name: "Heavy Embroidery Machine Setup", qty: "2 Units" },
-                    { name: "Stonework Embellishments", qty: "250 Grams" },
-                    { name: "Chiffon & Georgette fabrics", qty: "10 Rolls" }
+                    { name: "Stonework Embellishments", qty: "250 Grams" }
                 ]
             }
         };
@@ -1324,22 +1321,17 @@
             if(element) { element.scrollIntoView({ behavior: 'smooth' }); }
         }
 
-        // SWIPE CAROUSEL DIRECTIONAL SCROLL
         function scrollWorksContainer(direction) {
             const container = document.getElementById('recentWorksWrapper');
-            const scrollDistance = 300; 
-            container.scrollBy({
-                left: direction * scrollDistance,
-                behavior: 'smooth'
-            });
+            container.scrollBy({ left: direction * 300, behavior: 'smooth' });
         }
 
-        // POPULATE DETAIL POPUP WITH IMAGE GALLERY CAROUSEL
         function openProductDetails(productName) {
             selectedProduct = productName;
-            document.getElementById('detailsTitle').innerText = productName;
+            const details = productData[productName];
+            selectedProductCode = details ? details.code : "DC-UNKNOWN";
             
-            const details = productData[productName] || { text: "", images: [], tools: [] };
+            document.getElementById('detailsTitle').innerText = productName + " (" + selectedProductCode + ")";
             document.getElementById('detailsServiceText').innerText = details.text;
             
             const slidesContainer = document.getElementById('carouselSlidesContainer');
@@ -1352,17 +1344,14 @@
 
             details.images.forEach((imgUrl, idx) => {
                 const imgClass = idx === 0 ? "carousel-slide active" : "carousel-slide";
-                slidesContainer.innerHTML += `<img src="${imgUrl}" class="${imgClass}" alt="${productName} View">`;
-                
-                const dotClass = idx === 0 ? "carousel-dot active" : "carousel-dot";
-                dotsContainer.innerHTML += `<span class="${dotClass}" onclick="setSlide(${idx})"></span>`;
+                slidesContainer.innerHTML += `<img src="${imgUrl}" class="${imgClass}" alt="${productName}">`;
+                dotsContainer.innerHTML += `<span class="carousel-dot ${idx === 0 ? 'active' : ''}" onclick="setSlide(${idx})"></span>`;
             });
 
             const tbody = document.getElementById('toolsList');
             tbody.innerHTML = "";
             details.tools.forEach(tool => {
-                const row = `<tr><td>${tool.name}</td><td>${tool.qty}</td></tr>`;
-                tbody.innerHTML += row;
+                tbody.innerHTML += `<tr><td>${tool.name}</td><td>${tool.qty}</td></tr>`;
             });
             document.getElementById('detailsModal').classList.remove('hidden');
         }
@@ -1377,23 +1366,16 @@
 
         function setSlide(index) {
             activeSlideIndex = index;
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-            
-            slides.forEach((slide, idx) => {
-                slide.classList.toggle('active', idx === index);
-            });
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === index);
-            });
+            document.querySelectorAll('.carousel-slide').forEach((s, idx) => s.classList.toggle('active', idx === index));
+            document.querySelectorAll('.carousel-dot').forEach((d, idx) => d.classList.toggle('active', idx === index));
         }
 
-        function closeDetailsModal() {
-            document.getElementById('detailsModal').classList.add('hidden');
-        }
+        function closeDetailsModal() { document.getElementById('detailsModal').classList.add('hidden'); }
 
+        // LOCK CODE TO THE FORM INPUT STATICALLY
         function openBookingFromDetails() {
             closeDetailsModal();
+            document.getElementById('bookProductCode').value = selectedProductCode;
             document.getElementById('bookingModal').classList.remove('hidden');
         }
 
@@ -1404,9 +1386,7 @@
 
         function handleBookingSubmit(e) {
             e.preventDefault();
-            
             const submitBtn = e.target.querySelector('.submit-btn');
-            const oldText = submitBtn.innerText;
             submitBtn.disabled = true;
             submitBtn.innerText = "Processing...⏳";
 
@@ -1417,7 +1397,7 @@
                 whatsapp: document.getElementById('bookWhatsapp').value,
                 location: document.getElementById('bookLocation').value,
                 datetime: document.getElementById('bookDateTime').value,
-                message: "Selected Saree: " + selectedProduct + " | " + document.getElementById('bookText').value
+                message: "Product Code: " + document.getElementById('bookProductCode').value + " | Name: " + selectedProduct + " | Notes: " + document.getElementById('bookText').value
             };
 
             fetch(WEB_APP_URL, {
@@ -1429,52 +1409,40 @@
             })
             .then(() => {
                 closeBookingModal();
-                document.getElementById('thankYouMsg').innerText = "Thank you for booking " + selectedProduct + "!";
+                document.getElementById('thankYouMsg').innerText = "Booking confirmed for code: " + selectedProductCode;
                 document.getElementById('thankYouModal').classList.remove('hidden');
-                
                 submitBtn.disabled = false;
-                submitBtn.innerText = oldText;
+                submitBtn.innerText = "Submit Booking";
             })
             .catch(err => {
                 console.error(err);
                 closeBookingModal();
-                document.getElementById('thankYouMsg').innerText = "Thank you for booking " + selectedProduct + "!";
+                document.getElementById('thankYouMsg').innerText = "Booking confirmed for code: " + selectedProductCode;
                 document.getElementById('thankYouModal').classList.remove('hidden');
                 submitBtn.disabled = false;
-                submitBtn.innerText = oldText;
+                submitBtn.innerText = "Submit Booking";
             });
         }
 
-        function closeThankYouModal() {
-            document.getElementById('thankYouModal').classList.add('hidden');
-        }
-
+        function closeThankYouModal() { document.getElementById('thankYouModal').classList.add('hidden'); }
         function openLoginModal() { closeSideMenu(); document.getElementById('loginModal').classList.remove('hidden'); }
         function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
 
         function handleAdminLogin(e) {
             e.preventDefault();
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-            
-            if(user === 'admin' && pass === 'dwaraka2026') {
+            if(document.getElementById('adminUser').value === 'admin' && document.getElementById('adminPass').value === 'dwaraka2026') {
                 window.location.href = 'admin.html';
             } else {
-                alert('తప్పుడు యూజర్ ఐడి లేదా పాస్‌వర్డ్!');
+                alert('తప్పుడు సమాచారం!');
             }
-        }
-
-        function logoutAdmin() {
-            document.getElementById('adminView').classList.add('hidden');
-            document.getElementById('customerView').classList.remove('hidden');
         }
 
         function toggleFaq(element) {
             const answer = element.nextElementSibling;
             answer.classList.toggle('hidden');
-            const icon = element.querySelector('span');
-            icon.innerText = answer.classList.contains('hidden') ? '+' : '-';
+            element.querySelector('span').innerText = answer.classList.contains('hidden') ? '+' : '-';
         }
     </script>
 </body>
 </html>
+                                
